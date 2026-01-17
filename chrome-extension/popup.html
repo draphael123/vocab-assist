@@ -70,6 +70,10 @@
       color: #6366f1;
     }
     
+    .stat-value.spelling {
+      color: #22c55e;
+    }
+    
     .stat-label {
       font-size: 11px;
       color: #888;
@@ -168,6 +172,16 @@
       color: white;
     }
     
+    .word-tag.misspelled {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
+    .word-tag.misspelled:hover {
+      background: #22c55e;
+      color: white;
+    }
+    
     /* Results */
     .results {
       padding: 0 16px 16px;
@@ -188,6 +202,11 @@
     
     .result-word strong {
       color: #6366f1;
+    }
+    
+    .result-word.spelling strong {
+      color: #dc2626;
+      text-decoration: wavy underline #dc2626;
     }
     
     .synonyms {
@@ -214,6 +233,16 @@
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    
+    .synonym.spelling {
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border-color: #fecaca;
+    }
+    
+    .synonym.spelling:hover {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
     }
     
     .no-results {
@@ -353,18 +382,18 @@
       <div class="logo-icon">✨</div>
       <span class="logo-text">Vocab Assist</span>
     </div>
-    <p class="tagline">Upgrade your vocabulary instantly</p>
+    <p class="tagline">Upgrade words & fix spelling instantly</p>
   </div>
   
   <!-- Stats -->
   <div class="stats-bar">
     <div class="stat">
       <div class="stat-value" id="words-upgraded">0</div>
-      <div class="stat-label">Words Upgraded</div>
+      <div class="stat-label">Upgraded</div>
     </div>
     <div class="stat">
-      <div class="stat-value" id="session-count">0</div>
-      <div class="stat-label">Sessions</div>
+      <div class="stat-value spelling" id="spelling-fixed">0</div>
+      <div class="stat-label">Spelling Fixed</div>
     </div>
   </div>
   
@@ -379,26 +408,25 @@
   
   <!-- Search -->
   <div class="search-section">
-    <input type="text" class="search-input" id="search" placeholder="Type a word to upgrade..." autofocus>
+    <input type="text" class="search-input" id="search" placeholder="Type a word to upgrade or check..." autofocus>
     <div class="quick-words">
       <div class="section-title">Try these</div>
       <div class="word-tags">
         <span class="word-tag" data-word="good">good</span>
-        <span class="word-tag" data-word="bad">bad</span>
         <span class="word-tag" data-word="important">important</span>
-        <span class="word-tag" data-word="very">very</span>
         <span class="word-tag" data-word="help">help</span>
-        <span class="word-tag" data-word="make">make</span>
+        <span class="word-tag misspelled" data-word="recieve">recieve</span>
+        <span class="word-tag misspelled" data-word="definately">definately</span>
       </div>
     </div>
   </div>
   
   <!-- Results -->
   <div class="results" id="results">
-    <div class="result-word">Upgrades for <strong id="result-word"></strong></div>
+    <div class="result-word" id="result-header">Upgrades for <strong id="result-word"></strong></div>
     <div class="synonyms" id="synonyms"></div>
     <div class="no-results" id="no-results" style="display: none;">
-      No upgrades found for this word
+      No suggestions found
     </div>
   </div>
   
@@ -412,9 +440,9 @@
       </label>
     </div>
     <div class="setting-row">
-      <span class="setting-label">Auto-highlight weak words</span>
+      <span class="setting-label">Spell checking</span>
       <label class="toggle">
-        <input type="checkbox" id="setting-highlight" checked>
+        <input type="checkbox" id="setting-spell" checked>
         <span class="toggle-slider"></span>
       </label>
     </div>
@@ -423,7 +451,7 @@
   <!-- Shortcut -->
   <div class="shortcut">
     <p class="shortcut-text">
-      Select text + <span class="shortcut-key">Ctrl</span>+<span class="shortcut-key">Shift</span>+<span class="shortcut-key">U</span> to upgrade
+      Select text + <span class="shortcut-key">Ctrl</span>+<span class="shortcut-key">Shift</span>+<span class="shortcut-key">U</span> to upgrade/fix
     </p>
   </div>
   
@@ -434,6 +462,7 @@
   
   <div class="copied" id="copied">Copied to clipboard!</div>
   
+  <script src="spellcheck.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

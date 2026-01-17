@@ -33,8 +33,8 @@ const synonymData = {
 };
 
 let currentTone = 'formal';
-let settings = { showFloatingButton: true, autoHighlight: true };
-let stats = { wordsUpgraded: 0, sessionsCount: 0 };
+let settings = { showFloatingButton: true, spellCheck: true };
+let stats = { wordsUpgraded: 0, spellingFixed: 0, sessionsCount: 0 };
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (result.vocabSettings) {
       settings = { ...settings, ...result.vocabSettings };
       document.getElementById('setting-float').checked = settings.showFloatingButton;
-      document.getElementById('setting-highlight').checked = settings.autoHighlight;
+      document.getElementById('setting-spell').checked = settings.spellCheck !== false;
       currentTone = settings.tone || 'formal';
       updateToneButtons();
     }
     if (result.vocabStats) {
       stats = { ...stats, ...result.vocabStats };
-      document.getElementById('words-upgraded').textContent = stats.wordsUpgraded;
-      document.getElementById('session-count').textContent = stats.sessionsCount;
+      document.getElementById('words-upgraded').textContent = stats.wordsUpgraded || 0;
+      document.getElementById('spelling-fixed').textContent = stats.spellingFixed || 0;
     }
   });
   
@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search');
   const quickWords = document.querySelector('.quick-words');
   const results = document.getElementById('results');
+  const resultHeader = document.getElementById('result-header');
   const resultWord = document.getElementById('result-word');
   const synonymsContainer = document.getElementById('synonyms');
   const noResults = document.getElementById('no-results');
@@ -112,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
     saveSettings();
   });
   
-  document.getElementById('setting-highlight').addEventListener('change', (e) => {
-    settings.autoHighlight = e.target.checked;
+  document.getElementById('setting-spell').addEventListener('change', (e) => {
+    settings.spellCheck = e.target.checked;
     saveSettings();
   });
   
@@ -140,14 +141,48 @@ document.addEventListener('DOMContentLoaded', () => {
     return [];
   }
   
+  function getSpellingSuggestions(word) {
+    if (window.VocabSpellCheck) {
+      return window.VocabSpellCheck.getSpellingSuggestions(word);
+    }
+    return [];
+  }
+  
+  function isCorrectlySpelled(word) {
+    if (window.VocabSpellCheck) {
+      return window.VocabSpellCheck.isCorrectlySpelled(word);
+    }
+    return true;
+  }
+  
   function showResults(word) {
     const synonyms = getSynonyms(word);
+    const isSpelledCorrectly = isCorrectlySpelled(word);
+    const spellingSuggestions = !isSpelledCorrectly ? getSpellingSuggestions(word) : [];
     
     quickWords.style.display = 'none';
     results.classList.add('show');
-    resultWord.textContent = `"${word}" (${currentTone})`;
     
-    if (synonyms.length > 0) {
+    // Check if it's a spelling error
+    if (!isSpelledCorrectly && spellingSuggestions.length > 0) {
+      resultHeader.className = 'result-word spelling';
+      resultHeader.innerHTML = `📝 Spelling fix for <strong>${word}</strong>`;
+      
+      noResults.style.display = 'none';
+      synonymsContainer.style.display = 'flex';
+      synonymsContainer.innerHTML = '';
+      
+      spellingSuggestions.forEach(suggestion => {
+        const btn = document.createElement('button');
+        btn.className = 'synonym spelling';
+        btn.textContent = suggestion;
+        btn.addEventListener('click', () => copyToClipboard(suggestion));
+        synonymsContainer.appendChild(btn);
+      });
+    } else if (synonyms.length > 0) {
+      resultHeader.className = 'result-word';
+      resultHeader.innerHTML = `✨ Upgrades for <strong>${word}</strong> (${currentTone})`;
+      
       noResults.style.display = 'none';
       synonymsContainer.style.display = 'flex';
       synonymsContainer.innerHTML = '';
@@ -160,8 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         synonymsContainer.appendChild(btn);
       });
     } else {
+      resultHeader.className = 'result-word';
+      resultHeader.innerHTML = `Looking for <strong>${word}</strong>`;
       synonymsContainer.style.display = 'none';
       noResults.style.display = 'block';
+      noResults.textContent = isSpelledCorrectly 
+        ? 'No upgrades available for this word'
+        : 'Word appears to be spelled correctly';
     }
   }
   

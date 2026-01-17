@@ -81,6 +81,38 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+/* Mode Selector */
+.vocab-assist-mode {
+  display: flex;
+  padding: 8px;
+  gap: 6px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #eee;
+}
+
+.vocab-mode-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #666;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.vocab-mode-btn:hover {
+  background: #e5e5e5;
+}
+
+.vocab-mode-btn.active {
+  background: white;
+  color: #6366f1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 /* Selected Word */
 .vocab-assist-word {
   padding: 14px 18px;
@@ -88,6 +120,20 @@
   color: #666;
   border-bottom: 1px solid #eee;
   background: #fafafa;
+}
+
+.vocab-assist-word strong {
+  color: #333;
+}
+
+.spelling-error {
+  color: #dc2626;
+}
+
+.spelling-error strong {
+  color: #dc2626;
+  text-decoration: wavy underline #dc2626;
+  text-underline-offset: 3px;
 }
 
 /* Suggestions Grid */
@@ -116,6 +162,17 @@
   border-color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+}
+
+/* Spelling suggestion style */
+.vocab-assist-suggestion.spelling-suggestion {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fecaca;
+}
+
+.vocab-assist-suggestion.spelling-suggestion:hover {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
 }
 
 .vocab-assist-no-results {
@@ -199,12 +256,31 @@
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
 }
 
+#vocab-assist-float-btn.vocab-float-spelling {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  animation: vocab-float-pulse-red 2s infinite;
+}
+
+#vocab-assist-float-btn.vocab-float-spelling:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
 @keyframes vocab-float-pulse {
   0%, 100% {
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
   }
   50% {
     box-shadow: 0 4px 20px rgba(99, 102, 241, 0.6);
+  }
+}
+
+@keyframes vocab-float-pulse-red {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.6);
   }
 }
 
@@ -248,26 +324,18 @@
   background: linear-gradient(135deg, #fde68a 0%, #fcd34d 100%);
 }
 
-/* Has Weak Words Indicator */
-.vocab-has-weak-words {
-  position: relative;
+/* Spelling Error Highlight */
+.vocab-spelling-error {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-radius: 3px;
+  padding: 0 2px;
+  border-bottom: 2px wavy #ef4444;
+  cursor: pointer;
+  transition: background 0.15s;
 }
 
-.vocab-has-weak-words::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 8px;
-  height: 8px;
-  background: #f59e0b;
-  border-radius: 50%;
-  animation: vocab-indicator-pulse 1.5s infinite;
-}
-
-@keyframes vocab-indicator-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
+.vocab-spelling-error:hover {
+  background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
 }
 
 /* Dark mode support */
@@ -277,10 +345,37 @@
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
   
+  .vocab-assist-mode {
+    background: #12121e;
+    border-bottom-color: #333;
+  }
+  
+  .vocab-mode-btn {
+    color: #888;
+  }
+  
+  .vocab-mode-btn:hover {
+    background: #2a2a3e;
+  }
+  
+  .vocab-mode-btn.active {
+    background: #2a2a4e;
+    color: #a5b4fc;
+  }
+  
   .vocab-assist-word {
     color: #aaa;
     border-bottom-color: #333;
     background: #12121e;
+  }
+  
+  .vocab-assist-word strong {
+    color: #fff;
+  }
+  
+  .spelling-error,
+  .spelling-error strong {
+    color: #fca5a5;
   }
   
   .vocab-assist-suggestion {
@@ -291,6 +386,11 @@
   
   .vocab-assist-suggestion:hover {
     background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
+  }
+  
+  .vocab-assist-suggestion.spelling-suggestion {
+    background: linear-gradient(135deg, #3f1f1f 0%, #4a2020 100%);
+    border-color: #7f1d1d;
   }
   
   .vocab-assist-footer {
@@ -317,6 +417,12 @@
     background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
     border-bottom-color: #f59e0b;
     color: #fef3c7;
+  }
+  
+  .vocab-spelling-error {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    border-bottom-color: #ef4444;
+    color: #fee2e2;
   }
 }
 

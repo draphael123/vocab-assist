@@ -1,138 +1,39 @@
 // Enhanced synonym map with tone support
 const synonymData = {
   words: {
-    "good": {
-      formal: ["excellent", "outstanding", "exceptional", "superior", "exemplary"],
-      casual: ["great", "awesome", "fantastic", "terrific", "wonderful"]
-    },
-    "bad": {
-      formal: ["poor", "inadequate", "substandard", "inferior", "deficient"],
-      casual: ["terrible", "awful", "lousy", "crummy", "rough"]
-    },
-    "big": {
-      formal: ["substantial", "considerable", "significant", "extensive", "sizable"],
-      casual: ["huge", "massive", "enormous", "giant", "tremendous"]
-    },
-    "small": {
-      formal: ["modest", "minimal", "limited", "minor", "slight"],
-      casual: ["tiny", "little", "mini", "teeny", "slight"]
-    },
-    "important": {
-      formal: ["crucial", "essential", "vital", "critical", "paramount"],
-      casual: ["big deal", "major", "key", "crucial", "vital"]
-    },
-    "difficult": {
-      formal: ["challenging", "demanding", "arduous", "formidable", "complex"],
-      casual: ["tough", "hard", "tricky", "rough", "intense"]
-    },
-    "easy": {
-      formal: ["straightforward", "uncomplicated", "manageable", "accessible", "attainable"],
-      casual: ["simple", "breeze", "piece of cake", "no-brainer", "cinch"]
-    },
-    "fast": {
-      formal: ["rapid", "swift", "expedient", "prompt", "accelerated"],
-      casual: ["quick", "speedy", "snappy", "zippy", "lightning-fast"]
-    },
-    "slow": {
-      formal: ["gradual", "deliberate", "measured", "unhurried", "leisurely"],
-      casual: ["sluggish", "poky", "lazy", "dawdling", "unhurried"]
-    },
-    "use": {
-      formal: ["utilize", "employ", "leverage", "implement", "apply"],
-      casual: ["work with", "go with", "try", "pick", "grab"]
-    },
-    "make": {
-      formal: ["create", "develop", "establish", "construct", "formulate"],
-      casual: ["put together", "whip up", "come up with", "build", "craft"]
-    },
-    "change": {
-      formal: ["modify", "alter", "adjust", "transform", "revise"],
-      casual: ["switch up", "mix up", "tweak", "shake up", "flip"]
-    },
-    "fix": {
-      formal: ["resolve", "rectify", "remedy", "address", "correct"],
-      casual: ["sort out", "patch up", "work out", "deal with", "handle"]
-    },
-    "help": {
-      formal: ["assist", "facilitate", "support", "aid", "enable"],
-      casual: ["give a hand", "pitch in", "back up", "chip in", "lend support"]
-    },
-    "show": {
-      formal: ["demonstrate", "illustrate", "reveal", "exhibit", "present"],
-      casual: ["point out", "bring up", "lay out", "spell out", "break down"]
-    },
-    "get": {
-      formal: ["obtain", "acquire", "secure", "procure", "attain"],
-      casual: ["grab", "snag", "score", "pick up", "land"]
-    },
-    "think": {
-      formal: ["consider", "contemplate", "evaluate", "assess", "deliberate"],
-      casual: ["figure", "reckon", "guess", "suppose", "imagine"]
-    },
-    "say": {
-      formal: ["state", "express", "articulate", "convey", "communicate"],
-      casual: ["mention", "bring up", "point out", "note", "share"]
-    },
-    "very": {
-      formal: ["exceptionally", "remarkably", "particularly", "extremely", "notably"],
-      casual: ["super", "really", "totally", "seriously", "crazy"]
-    },
-    "many": {
-      formal: ["numerous", "multiple", "various", "several", "abundant"],
-      casual: ["tons of", "loads of", "bunch of", "heap of", "lots of"]
-    },
-    "really": {
-      formal: ["genuinely", "truly", "indeed", "certainly", "undoubtedly"],
-      casual: ["totally", "seriously", "honestly", "legit", "for real"]
-    },
-    "just": {
-      formal: ["merely", "simply", "solely", "only", "precisely"],
-      casual: ["only", "like", "kinda", "sorta", "barely"]
-    },
-    "basically": {
-      formal: ["fundamentally", "essentially", "primarily", "principally", "chiefly"],
-      casual: ["pretty much", "more or less", "kind of", "sort of", "like"]
-    },
-    "actually": {
-      formal: ["in fact", "indeed", "in reality", "in truth", "genuinely"],
-      casual: ["tbh", "for real", "no joke", "straight up", "low-key"]
-    },
-    "new": {
-      formal: ["novel", "innovative", "contemporary", "modern", "recent"],
-      casual: ["fresh", "latest", "brand-new", "hot", "up-and-coming"]
-    },
-    "old": {
-      formal: ["established", "traditional", "longstanding", "legacy", "previous"],
-      casual: ["dated", "vintage", "classic", "ancient", "outdated"]
-    },
-    "problem": {
-      formal: ["issue", "challenge", "difficulty", "complication", "obstacle"],
-      casual: ["snag", "hiccup", "headache", "hassle", "mess"]
-    },
-    "thing": {
-      formal: ["matter", "element", "aspect", "factor", "component"],
-      casual: ["stuff", "deal", "bit", "piece", "whatever"]
-    },
-    "nice": {
-      formal: ["pleasant", "agreeable", "delightful", "commendable", "favorable"],
-      casual: ["cool", "great", "awesome", "sweet", "solid"]
-    },
-    "interesting": {
-      formal: ["compelling", "intriguing", "noteworthy", "fascinating", "engaging"],
-      casual: ["cool", "neat", "wild", "sick", "dope"]
-    },
-    "amazing": {
-      formal: ["remarkable", "extraordinary", "exceptional", "outstanding", "impressive"],
-      casual: ["awesome", "incredible", "mind-blowing", "insane", "unreal"]
-    },
-    "different": {
-      formal: ["distinct", "diverse", "varied", "alternative", "dissimilar"],
-      casual: ["other", "another", "fresh", "unique", "unlike"]
-    },
-    "great": {
-      formal: ["exceptional", "remarkable", "outstanding", "excellent", "superb"],
-      casual: ["awesome", "amazing", "fantastic", "incredible", "sick"]
-    }
+    "good": { formal: ["excellent", "outstanding", "exceptional", "superior", "exemplary"], casual: ["great", "awesome", "fantastic", "terrific", "wonderful"] },
+    "bad": { formal: ["poor", "inadequate", "substandard", "inferior", "deficient"], casual: ["terrible", "awful", "lousy", "crummy", "rough"] },
+    "big": { formal: ["substantial", "considerable", "significant", "extensive", "sizable"], casual: ["huge", "massive", "enormous", "giant", "tremendous"] },
+    "small": { formal: ["modest", "minimal", "limited", "minor", "slight"], casual: ["tiny", "little", "mini", "teeny", "slight"] },
+    "important": { formal: ["crucial", "essential", "vital", "critical", "paramount"], casual: ["big deal", "major", "key", "crucial", "vital"] },
+    "difficult": { formal: ["challenging", "demanding", "arduous", "formidable", "complex"], casual: ["tough", "hard", "tricky", "rough", "intense"] },
+    "easy": { formal: ["straightforward", "uncomplicated", "manageable", "accessible", "attainable"], casual: ["simple", "breeze", "piece of cake", "no-brainer", "cinch"] },
+    "fast": { formal: ["rapid", "swift", "expedient", "prompt", "accelerated"], casual: ["quick", "speedy", "snappy", "zippy", "lightning-fast"] },
+    "slow": { formal: ["gradual", "deliberate", "measured", "unhurried", "leisurely"], casual: ["sluggish", "poky", "lazy", "dawdling", "unhurried"] },
+    "use": { formal: ["utilize", "employ", "leverage", "implement", "apply"], casual: ["work with", "go with", "try", "pick", "grab"] },
+    "make": { formal: ["create", "develop", "establish", "construct", "formulate"], casual: ["put together", "whip up", "come up with", "build", "craft"] },
+    "change": { formal: ["modify", "alter", "adjust", "transform", "revise"], casual: ["switch up", "mix up", "tweak", "shake up", "flip"] },
+    "fix": { formal: ["resolve", "rectify", "remedy", "address", "correct"], casual: ["sort out", "patch up", "work out", "deal with", "handle"] },
+    "help": { formal: ["assist", "facilitate", "support", "aid", "enable"], casual: ["give a hand", "pitch in", "back up", "chip in", "lend support"] },
+    "show": { formal: ["demonstrate", "illustrate", "reveal", "exhibit", "present"], casual: ["point out", "bring up", "lay out", "spell out", "break down"] },
+    "get": { formal: ["obtain", "acquire", "secure", "procure", "attain"], casual: ["grab", "snag", "score", "pick up", "land"] },
+    "think": { formal: ["consider", "contemplate", "evaluate", "assess", "deliberate"], casual: ["figure", "reckon", "guess", "suppose", "imagine"] },
+    "say": { formal: ["state", "express", "articulate", "convey", "communicate"], casual: ["mention", "bring up", "point out", "note", "share"] },
+    "very": { formal: ["exceptionally", "remarkably", "particularly", "extremely", "notably"], casual: ["super", "really", "totally", "seriously", "crazy"] },
+    "many": { formal: ["numerous", "multiple", "various", "several", "abundant"], casual: ["tons of", "loads of", "bunch of", "heap of", "lots of"] },
+    "really": { formal: ["genuinely", "truly", "indeed", "certainly", "undoubtedly"], casual: ["totally", "seriously", "honestly", "legit", "for real"] },
+    "just": { formal: ["merely", "simply", "solely", "only", "precisely"], casual: ["only", "like", "kinda", "sorta", "barely"] },
+    "basically": { formal: ["fundamentally", "essentially", "primarily", "principally", "chiefly"], casual: ["pretty much", "more or less", "kind of", "sort of", "like"] },
+    "actually": { formal: ["in fact", "indeed", "in reality", "in truth", "genuinely"], casual: ["tbh", "for real", "no joke", "straight up", "low-key"] },
+    "new": { formal: ["novel", "innovative", "contemporary", "modern", "recent"], casual: ["fresh", "latest", "brand-new", "hot", "up-and-coming"] },
+    "old": { formal: ["established", "traditional", "longstanding", "legacy", "previous"], casual: ["dated", "vintage", "classic", "ancient", "outdated"] },
+    "problem": { formal: ["issue", "challenge", "difficulty", "complication", "obstacle"], casual: ["snag", "hiccup", "headache", "hassle", "mess"] },
+    "thing": { formal: ["matter", "element", "aspect", "factor", "component"], casual: ["stuff", "deal", "bit", "piece", "whatever"] },
+    "nice": { formal: ["pleasant", "agreeable", "delightful", "commendable", "favorable"], casual: ["cool", "great", "awesome", "sweet", "solid"] },
+    "interesting": { formal: ["compelling", "intriguing", "noteworthy", "fascinating", "engaging"], casual: ["cool", "neat", "wild", "sick", "dope"] },
+    "amazing": { formal: ["remarkable", "extraordinary", "exceptional", "outstanding", "impressive"], casual: ["awesome", "incredible", "mind-blowing", "insane", "unreal"] },
+    "different": { formal: ["distinct", "diverse", "varied", "alternative", "dissimilar"], casual: ["other", "another", "fresh", "unique", "unlike"] },
+    "great": { formal: ["exceptional", "remarkable", "outstanding", "excellent", "superb"], casual: ["awesome", "amazing", "fantastic", "incredible", "sick"] }
   },
   weakWords: ["very", "really", "just", "actually", "basically", "literally", "definitely", "certainly", "obviously", "clearly", "simply", "quite", "rather", "fairly", "pretty", "somewhat", "kind of", "sort of", "a lot", "thing", "stuff", "good", "bad", "nice", "interesting", "amazing", "great", "big", "small"]
 };
@@ -144,16 +45,17 @@ let activeElement = null;
 let selectedText = '';
 let selectionRange = null;
 let lastReplacement = null;
-let highlightedElements = [];
 let settings = {
   autoHighlight: true,
   tone: 'formal',
-  showFloatingButton: true
+  showFloatingButton: true,
+  spellCheck: true
 };
 
 // Stats tracking
 let stats = {
   wordsUpgraded: 0,
+  spellingFixed: 0,
   sessionsCount: 0,
   lastUsed: null
 };
@@ -187,7 +89,7 @@ function createPopup() {
   popup.id = 'vocab-assist-popup';
   popup.innerHTML = `
     <div class="vocab-assist-header">
-      <span class="vocab-assist-title">✨ Upgrade Word</span>
+      <span class="vocab-assist-title">✨ Word Helper</span>
       <div class="vocab-assist-header-actions">
         <select class="vocab-assist-tone-select" id="vocab-tone">
           <option value="formal">Formal</option>
@@ -195,6 +97,10 @@ function createPopup() {
         </select>
         <button class="vocab-assist-close">&times;</button>
       </div>
+    </div>
+    <div class="vocab-assist-mode" id="vocab-mode">
+      <button class="vocab-mode-btn active" data-mode="upgrade">✨ Upgrade</button>
+      <button class="vocab-mode-btn" data-mode="spell">📝 Spelling</button>
     </div>
     <div class="vocab-assist-word"></div>
     <div class="vocab-assist-suggestions"></div>
@@ -204,7 +110,7 @@ function createPopup() {
       </button>
     </div>
     <div class="vocab-assist-footer">
-      <span class="vocab-assist-stats">📊 <span id="vocab-stats-count">0</span> words upgraded</span>
+      <span class="vocab-assist-stats">📊 <span id="vocab-stats-count">0</span> improved</span>
       <a href="https://website-ten-navy-tv0whkwmm8.vercel.app" target="_blank">More →</a>
     </div>
   `;
@@ -218,9 +124,21 @@ function createPopup() {
   popup.querySelector('#vocab-tone').addEventListener('change', (e) => {
     settings.tone = e.target.value;
     chrome.storage.local.set({ vocabSettings: settings });
-    if (selectedText) {
-      updateSuggestions(selectedText);
+    if (selectedText && currentMode === 'upgrade') {
+      updateSuggestions(selectedText, 'upgrade');
     }
+  });
+  
+  // Mode buttons
+  popup.querySelectorAll('.vocab-mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      popup.querySelectorAll('.vocab-mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
+      if (selectedText) {
+        updateSuggestions(selectedText, currentMode);
+      }
+    });
   });
   
   // Undo button
@@ -236,14 +154,14 @@ function createPopup() {
   return popup;
 }
 
+let currentMode = 'upgrade';
+
 // Create floating button
 function createFloatingButton() {
   if (floatingButton) return floatingButton;
   
   floatingButton = document.createElement('div');
   floatingButton.id = 'vocab-assist-float-btn';
-  floatingButton.innerHTML = '✨';
-  floatingButton.title = 'Upgrade this word';
   floatingButton.style.display = 'none';
   
   floatingButton.addEventListener('click', (e) => {
@@ -258,11 +176,34 @@ function createFloatingButton() {
   return floatingButton;
 }
 
-// Show floating button near selection
-function showFloatingButton(x, y) {
+// Update floating button appearance based on word type
+function updateFloatingButton(word, x, y) {
   if (!settings.showFloatingButton) return;
   
   createFloatingButton();
+  
+  const hasUpgrade = getSynonyms(word, settings.tone).length > 0;
+  const hasSpelling = window.VocabSpellCheck && !window.VocabSpellCheck.isCorrectlySpelled(word);
+  
+  if (!hasUpgrade && !hasSpelling) {
+    floatingButton.style.display = 'none';
+    return;
+  }
+  
+  // Show different icon based on what's available
+  if (hasSpelling) {
+    floatingButton.innerHTML = '📝';
+    floatingButton.title = 'Fix spelling';
+    floatingButton.className = 'vocab-float-spelling';
+    currentMode = 'spell';
+  } else {
+    floatingButton.innerHTML = '✨';
+    floatingButton.title = 'Upgrade word';
+    floatingButton.className = '';
+    currentMode = 'upgrade';
+  }
+  
+  floatingButton.id = 'vocab-assist-float-btn';
   floatingButton.style.display = 'flex';
   floatingButton.style.left = `${x}px`;
   floatingButton.style.top = `${y - 35}px`;
@@ -276,40 +217,75 @@ function hideFloatingButton() {
 }
 
 // Update suggestions in popup
-function updateSuggestions(word) {
-  const synonyms = getSynonyms(word, settings.tone);
+function updateSuggestions(word, mode = 'upgrade') {
   const suggestionsContainer = popup.querySelector('.vocab-assist-suggestions');
+  const wordDisplay = popup.querySelector('.vocab-assist-word');
   suggestionsContainer.innerHTML = '';
   
-  if (synonyms.length > 0) {
-    synonyms.slice(0, 8).forEach(synonym => {
+  let suggestions = [];
+  
+  if (mode === 'upgrade') {
+    suggestions = getSynonyms(word, settings.tone);
+    wordDisplay.innerHTML = `Upgrade "<strong>${word}</strong>"`;
+  } else if (mode === 'spell' && window.VocabSpellCheck) {
+    suggestions = window.VocabSpellCheck.getSpellingSuggestions(word);
+    wordDisplay.innerHTML = `<span class="spelling-error">Spelling: "<strong>${word}</strong>"</span>`;
+  }
+  
+  if (suggestions.length > 0) {
+    suggestions.slice(0, 8).forEach(suggestion => {
       const btn = document.createElement('button');
       btn.className = 'vocab-assist-suggestion';
-      btn.textContent = synonym;
-      btn.addEventListener('click', () => replaceWord(synonym));
+      if (mode === 'spell') btn.classList.add('spelling-suggestion');
+      btn.textContent = suggestion;
+      btn.addEventListener('click', () => replaceWord(suggestion, mode));
       suggestionsContainer.appendChild(btn);
     });
   } else {
-    suggestionsContainer.innerHTML = '<div class="vocab-assist-no-results">No suggestions for this word</div>';
+    const noResultsText = mode === 'upgrade' 
+      ? 'No upgrades available' 
+      : 'No spelling suggestions';
+    suggestionsContainer.innerHTML = `<div class="vocab-assist-no-results">${noResultsText}</div>`;
   }
+  
+  // Update mode buttons
+  popup.querySelectorAll('.vocab-mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
 }
 
 // Show popup with suggestions
 function showPopup(word, x, y) {
-  const synonyms = getSynonyms(word, settings.tone);
-  
   createPopup();
   hideFloatingButton();
   
-  popup.querySelector('.vocab-assist-word').textContent = `"${word}"`;
+  // Determine which mode to show
+  const hasUpgrade = getSynonyms(word, settings.tone).length > 0;
+  const hasSpelling = window.VocabSpellCheck && !window.VocabSpellCheck.isCorrectlySpelled(word);
+  
+  if (hasSpelling && !hasUpgrade) {
+    currentMode = 'spell';
+  } else if (hasUpgrade) {
+    currentMode = 'upgrade';
+  }
+  
   popup.querySelector('#vocab-tone').value = settings.tone;
-  popup.querySelector('#vocab-stats-count').textContent = stats.wordsUpgraded;
+  popup.querySelector('#vocab-stats-count').textContent = stats.wordsUpgraded + stats.spellingFixed;
   
   // Show/hide undo button
   const undoBtn = popup.querySelector('#vocab-undo');
   undoBtn.style.display = lastReplacement ? 'block' : 'none';
   
-  updateSuggestions(word);
+  // Show/hide mode buttons based on availability
+  const modeContainer = popup.querySelector('#vocab-mode');
+  const upgradeBtn = modeContainer.querySelector('[data-mode="upgrade"]');
+  const spellBtn = modeContainer.querySelector('[data-mode="spell"]');
+  
+  upgradeBtn.style.display = hasUpgrade ? 'block' : 'none';
+  spellBtn.style.display = hasSpelling ? 'block' : 'none';
+  modeContainer.style.display = (hasUpgrade && hasSpelling) ? 'flex' : 'none';
+  
+  updateSuggestions(word, currentMode);
   
   // Position popup
   popup.style.display = 'block';
@@ -342,7 +318,7 @@ function hidePopup() {
 }
 
 // Replace selected word
-function replaceWord(newWord) {
+function replaceWord(newWord, mode = 'upgrade') {
   if (!activeElement || !selectedText) {
     hidePopup();
     return;
@@ -354,7 +330,8 @@ function replaceWord(newWord) {
     original: selectedText,
     replacement: newWord,
     selectionStart: null,
-    selectionEnd: null
+    selectionEnd: null,
+    mode: mode
   };
   
   if (activeElement.tagName === 'TEXTAREA' || activeElement.tagName === 'INPUT') {
@@ -382,19 +359,25 @@ function replaceWord(newWord) {
   }
   
   // Update stats
-  stats.wordsUpgraded++;
+  if (mode === 'spell') {
+    stats.spellingFixed++;
+  } else {
+    stats.wordsUpgraded++;
+  }
   stats.lastUsed = new Date().toISOString();
   chrome.storage.local.set({ vocabStats: stats });
   
   hidePopup();
-  showToast(`✨ "${selectedText}" → "${newWord}"`);
+  
+  const emoji = mode === 'spell' ? '📝' : '✨';
+  showToast(`${emoji} "${selectedText}" → "${newWord}"`);
 }
 
 // Undo last replacement
 function undoLastReplacement() {
   if (!lastReplacement) return;
   
-  const { element, original, originalValue, selectionStart, range } = lastReplacement;
+  const { element, original, originalValue, selectionStart, range, mode } = lastReplacement;
   
   if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
     element.value = originalValue;
@@ -405,7 +388,11 @@ function undoLastReplacement() {
     document.execCommand('undo');
   }
   
-  stats.wordsUpgraded = Math.max(0, stats.wordsUpgraded - 1);
+  if (mode === 'spell') {
+    stats.spellingFixed = Math.max(0, stats.spellingFixed - 1);
+  } else {
+    stats.wordsUpgraded = Math.max(0, stats.wordsUpgraded - 1);
+  }
   chrome.storage.local.set({ vocabStats: stats });
   
   showToast(`↩ Undid replacement`);
@@ -430,40 +417,6 @@ function showToast(message) {
   }, 2500);
 }
 
-// Auto-highlight weak words in editable fields
-function highlightWeakWords(element) {
-  if (!settings.autoHighlight) return;
-  
-  // Only for contenteditable elements
-  if (!element.isContentEditable) return;
-  
-  // Clear existing highlights
-  clearHighlights(element);
-  
-  const text = element.innerText;
-  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
-  
-  let node;
-  while (node = walker.nextNode()) {
-    const nodeText = node.textContent;
-    synonymData.weakWords.forEach(weak => {
-      const regex = new RegExp(`\\b(${weak})\\b`, 'gi');
-      if (regex.test(nodeText)) {
-        // Mark weak words (simplified - full implementation would be more complex)
-        node.parentElement?.classList.add('vocab-has-weak-words');
-      }
-    });
-  }
-}
-
-// Clear highlights
-function clearHighlights(element) {
-  if (!element) return;
-  element.querySelectorAll('.vocab-weak-highlight').forEach(el => {
-    el.replaceWith(el.textContent);
-  });
-}
-
 // Handle text selection
 document.addEventListener('mouseup', (e) => {
   setTimeout(() => {
@@ -478,16 +431,15 @@ document.addEventListener('mouseup', (e) => {
         selectionRange = selection.getRangeAt(0).cloneRange();
       }
       
-      // Check if we have synonyms
-      const synonyms = getSynonyms(text, settings.tone);
-      if (synonyms.length > 0) {
-        // Show floating button or popup based on preference
-        if (settings.showFloatingButton) {
-          const rect = selection.getRangeAt(0).getBoundingClientRect();
-          showFloatingButton(rect.left + window.scrollX + (rect.width / 2) - 15, rect.top + window.scrollY);
-        } else {
-          showPopup(text, e.pageX, e.pageY);
-        }
+      // Check for upgrades or spelling errors
+      const hasUpgrade = getSynonyms(text, settings.tone).length > 0;
+      const hasSpelling = settings.spellCheck && window.VocabSpellCheck && !window.VocabSpellCheck.isCorrectlySpelled(text);
+      
+      if (hasUpgrade || hasSpelling) {
+        const rect = selection.getRangeAt(0).getBoundingClientRect();
+        updateFloatingButton(text, rect.left + window.scrollX + (rect.width / 2) - 15, rect.top + window.scrollY);
+      } else {
+        hideFloatingButton();
       }
     } else {
       hideFloatingButton();
@@ -525,13 +477,6 @@ document.addEventListener('keydown', (e) => {
       e.preventDefault();
       undoLastReplacement();
     }
-  }
-});
-
-// Listen for input to auto-highlight
-document.addEventListener('input', (e) => {
-  if (e.target.isContentEditable) {
-    highlightWeakWords(e.target);
   }
 });
 

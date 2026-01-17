@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Vocab Assist - Word Upgrader",
-  "version": "1.1.0",
-  "description": "Instantly upgrade your vocabulary while you write. Transform basic words into sophisticated alternatives with tone selection and auto-highlighting.",
+  "name": "Vocab Assist - Word Upgrader & Spell Checker",
+  "version": "1.2.0",
+  "description": "Upgrade your vocabulary and fix spelling mistakes while you write. Transform basic words into sophisticated alternatives with tone selection.",
   "permissions": [
     "activeTab",
     "contextMenus",
@@ -27,7 +27,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "js": ["spellcheck.js", "content.js"],
       "css": ["content.css"]
     }
   ],
@@ -37,7 +37,7 @@
         "default": "Ctrl+Shift+U",
         "mac": "Command+Shift+U"
       },
-      "description": "Upgrade selected word"
+      "description": "Upgrade selected word or fix spelling"
     }
   }
 }
