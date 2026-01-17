@@ -12,37 +12,37 @@
     }
     
     body {
-      width: 350px;
+      width: 380px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #fafbff 0%, #f5f0ff 100%);
     }
     
     .header {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-      padding: 20px;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      padding: 24px 20px;
       color: white;
     }
     
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 8px;
     }
     
     .logo-icon {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
     }
     
     .logo-text {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
     }
     
@@ -51,26 +51,37 @@
       opacity: 0.9;
     }
     
-    .search-section {
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: space-around;
       padding: 16px;
+      background: white;
+      border-bottom: 1px solid #eee;
     }
     
-    .search-input {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e5e7eb;
-      border-radius: 10px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
+    .stat {
+      text-align: center;
     }
     
-    .search-input:focus {
-      border-color: #6366f1;
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #6366f1;
     }
     
-    .quick-words {
-      padding: 0 16px 16px;
+    .stat-label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Tone Selector */
+    .tone-section {
+      padding: 16px;
+      background: white;
+      border-bottom: 1px solid #eee;
     }
     
     .section-title {
@@ -82,6 +93,59 @@
       margin-bottom: 10px;
     }
     
+    .tone-buttons {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .tone-btn {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: white;
+      font-size: 12px;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    
+    .tone-btn:hover {
+      border-color: #6366f1;
+      color: #6366f1;
+    }
+    
+    .tone-btn.active {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: white;
+    }
+    
+    /* Search */
+    .search-section {
+      padding: 16px;
+      background: white;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    
+    .search-input:focus {
+      border-color: #6366f1;
+    }
+    
+    .quick-words {
+      margin-top: 12px;
+    }
+    
     .word-tags {
       display: flex;
       flex-wrap: wrap;
@@ -90,8 +154,8 @@
     
     .word-tag {
       padding: 6px 12px;
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+      border: none;
       border-radius: 6px;
       font-size: 13px;
       color: #374151;
@@ -102,12 +166,13 @@
     .word-tag:hover {
       background: #6366f1;
       color: white;
-      border-color: #6366f1;
     }
     
+    /* Results */
     .results {
       padding: 0 16px 16px;
       display: none;
+      background: white;
     }
     
     .results.show {
@@ -117,7 +182,8 @@
     .result-word {
       font-size: 13px;
       color: #6b7280;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      padding-top: 4px;
     }
     
     .result-word strong {
@@ -127,18 +193,18 @@
     .synonyms {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
     
     .synonym {
-      padding: 8px 14px;
+      padding: 10px 16px;
       background: linear-gradient(135deg, #f0f0ff 0%, #fff5eb 100%);
       border: 1px solid #e0e0ff;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 14px;
       color: #333;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.2s;
       font-weight: 500;
     }
     
@@ -146,6 +212,8 @@
       background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
       color: white;
       border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
     
     .no-results {
@@ -155,10 +223,71 @@
       font-size: 14px;
     }
     
-    .shortcut {
+    /* Settings */
+    .settings-section {
       padding: 16px;
       background: #f9fafb;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid #eee;
+    }
+    
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+    
+    .setting-label {
+      font-size: 13px;
+      color: #374151;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #d1d5db;
+      border-radius: 24px;
+      transition: 0.3s;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    .toggle input:checked + .toggle-slider {
+      background: #6366f1;
+    }
+    
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+    
+    /* Shortcut Info */
+    .shortcut {
+      padding: 14px 16px;
+      background: white;
+      border-top: 1px solid #eee;
     }
     
     .shortcut-text {
@@ -169,8 +298,8 @@
     
     .shortcut-key {
       display: inline-block;
-      padding: 2px 6px;
-      background: white;
+      padding: 3px 8px;
+      background: #f3f4f6;
       border: 1px solid #d1d5db;
       border-radius: 4px;
       font-family: monospace;
@@ -178,10 +307,12 @@
       margin: 0 2px;
     }
     
+    /* Footer */
     .footer {
-      padding: 12px 16px;
+      padding: 14px 16px;
       text-align: center;
-      border-top: 1px solid #e5e7eb;
+      background: white;
+      border-top: 1px solid #eee;
     }
     
     .footer a {
@@ -195,18 +326,20 @@
       text-decoration: underline;
     }
 
+    /* Toast */
     .copied {
       position: fixed;
       bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: #333;
+      background: #1a1a2e;
       color: white;
-      padding: 8px 16px;
-      border-radius: 6px;
+      padding: 10px 20px;
+      border-radius: 8px;
       font-size: 13px;
       opacity: 0;
       transition: opacity 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
     
     .copied.show {
@@ -223,24 +356,44 @@
     <p class="tagline">Upgrade your vocabulary instantly</p>
   </div>
   
-  <div class="search-section">
-    <input type="text" class="search-input" id="search" placeholder="Type a word to upgrade..." autofocus>
-  </div>
-  
-  <div class="quick-words" id="quick-words">
-    <div class="section-title">Try these common words</div>
-    <div class="word-tags">
-      <span class="word-tag" data-word="good">good</span>
-      <span class="word-tag" data-word="bad">bad</span>
-      <span class="word-tag" data-word="important">important</span>
-      <span class="word-tag" data-word="help">help</span>
-      <span class="word-tag" data-word="use">use</span>
-      <span class="word-tag" data-word="make">make</span>
-      <span class="word-tag" data-word="show">show</span>
-      <span class="word-tag" data-word="think">think</span>
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value" id="words-upgraded">0</div>
+      <div class="stat-label">Words Upgraded</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="session-count">0</div>
+      <div class="stat-label">Sessions</div>
     </div>
   </div>
   
+  <!-- Tone Selector -->
+  <div class="tone-section">
+    <div class="section-title">Writing Tone</div>
+    <div class="tone-buttons">
+      <button class="tone-btn active" data-tone="formal">💼 Formal</button>
+      <button class="tone-btn" data-tone="casual">💬 Casual</button>
+    </div>
+  </div>
+  
+  <!-- Search -->
+  <div class="search-section">
+    <input type="text" class="search-input" id="search" placeholder="Type a word to upgrade..." autofocus>
+    <div class="quick-words">
+      <div class="section-title">Try these</div>
+      <div class="word-tags">
+        <span class="word-tag" data-word="good">good</span>
+        <span class="word-tag" data-word="bad">bad</span>
+        <span class="word-tag" data-word="important">important</span>
+        <span class="word-tag" data-word="very">very</span>
+        <span class="word-tag" data-word="help">help</span>
+        <span class="word-tag" data-word="make">make</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Results -->
   <div class="results" id="results">
     <div class="result-word">Upgrades for <strong id="result-word"></strong></div>
     <div class="synonyms" id="synonyms"></div>
@@ -249,20 +402,38 @@
     </div>
   </div>
   
+  <!-- Settings -->
+  <div class="settings-section">
+    <div class="setting-row">
+      <span class="setting-label">Show floating button</span>
+      <label class="toggle">
+        <input type="checkbox" id="setting-float" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <span class="setting-label">Auto-highlight weak words</span>
+      <label class="toggle">
+        <input type="checkbox" id="setting-highlight" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+  
+  <!-- Shortcut -->
   <div class="shortcut">
     <p class="shortcut-text">
-      Select any word and press <span class="shortcut-key">Ctrl</span>+<span class="shortcut-key">Shift</span>+<span class="shortcut-key">U</span> to upgrade
+      Select text + <span class="shortcut-key">Ctrl</span>+<span class="shortcut-key">Shift</span>+<span class="shortcut-key">U</span> to upgrade
     </p>
   </div>
   
+  <!-- Footer -->
   <div class="footer">
     <a href="https://website-ten-navy-tv0whkwmm8.vercel.app" target="_blank">Open full word library →</a>
   </div>
   
   <div class="copied" id="copied">Copied to clipboard!</div>
   
-  <script src="vocabulary.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
-

@@ -1,125 +1,151 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { getSynonymsForCommonWord, searchWords, getAllWords } from '@/lib/vocabulary'
-import { Word } from '@/lib/types'
 import { 
-  Sparkles, Copy, Check, ArrowRight, Zap, 
-  History, Star, Trash2, BookOpen
+  getAllSynonyms, 
+  calculateWritingScore, 
+  upgradeText, 
+  findWeakWordsInText,
+  getWeakWords,
+  getAvailableWords,
+  toneDescriptions,
+  Tone 
+} from '@/lib/synonyms'
+import { 
+  Sparkles, Copy, Check, Download, Trash2, RotateCcw,
+  Star, StarOff, Clock, Zap, BarChart3, AlertCircle,
+  Briefcase, GraduationCap, Building2, MessageCircle,
+  FileText, History, Heart, ArrowDownToLine, ChevronDown
 } from 'lucide-react'
 
+const toneIcons: Record<Tone, React.ElementType> = {
+  formal: Briefcase,
+  academic: GraduationCap,
+  business: Building2,
+  casual: MessageCircle,
+}
+
 interface HistoryItem {
-  original: string
-  replacement: string
-  timestamp: number
+  id: string;
+  original: string;
+  upgraded: string;
+  tone: Tone;
+  timestamp: number;
+  favorite?: boolean;
 }
 
 export default function UpgradePage() {
   const [inputText, setInputText] = useState('')
-  const [selectedWord, setSelectedWord] = useState('')
-  const [suggestions, setSuggestions] = useState<string[]>([])
-  const [copiedWord, setCopiedWord] = useState<string | null>(null)
-  const [history, setHistory] = useState<HistoryItem[]>([])
-  const [favorites, setFavorites] = useState<string[]>([])
-  const [showHistory, setShowHistory] = useState(false)
+  const [upgradedText, setUpgradedText] = useState('')
+  const [selectedTone, setSelectedTone] = useState<Tone>('formal')
+  const [copiedText, setCopiedText] = useState<'input' | 'output' | null>(null)
+  const [writingScore, setWritingScore] = useState({ score: 100, weakWordCount: 0, totalWords: 0, suggestions: [] as string[] })
   const [mounted, setMounted] = useState(false)
+  const [history, setHistory] = useState<HistoryItem[]>([])
+  const [showHistory, setShowHistory] = useState(false)
+  const [showExport, setShowExport] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     setMounted(true)
-    // Load history and favorites from localStorage
-    const savedHistory = localStorage.getItem('vocab_history')
-    const savedFavorites = localStorage.getItem('vocab_favorites')
-    if (savedHistory) setHistory(JSON.parse(savedHistory))
-    if (savedFavorites) setFavorites(JSON.parse(savedFavorites))
+    // Load history from localStorage
+    const savedHistory = localStorage.getItem('vocab-upgrade-history')
+    if (savedHistory) {
+      setHistory(JSON.parse(savedHistory))
+    }
   }, [])
 
   useEffect(() => {
-    if (selectedWord.trim()) {
-      const synonyms = getSynonymsForCommonWord(selectedWord.trim().toLowerCase())
-      
-      // Also search vocabulary for the word
-      if (synonyms.length === 0) {
-        const vocabWord = getAllWords().find(
-          w => w.word.toLowerCase() === selectedWord.trim().toLowerCase()
-        )
-        if (vocabWord) {
-          setSuggestions(vocabWord.synonyms)
-        } else {
-          setSuggestions([])
-        }
-      } else {
-        setSuggestions(synonyms)
-      }
+    if (inputText.trim()) {
+      const score = calculateWritingScore(inputText)
+      setWritingScore(score)
     } else {
-      setSuggestions([])
+      setWritingScore({ score: 100, weakWordCount: 0, totalWords: 0, suggestions: [] })
     }
-  }, [selectedWord])
+  }, [inputText])
 
-  const handleTextSelect = () => {
-    if (!textareaRef.current) return
-    const text = textareaRef.current.value
-    const start = textareaRef.current.selectionStart
-    const end = textareaRef.current.selectionEnd
+  const handleUpgrade = () => {
+    if (!inputText.trim()) return
     
-    if (start !== end) {
-      const selected = text.substring(start, end).trim()
-      if (selected && !selected.includes(' ')) {
-        setSelectedWord(selected)
-      }
+    const upgraded = upgradeText(inputText, selectedTone)
+    setUpgradedText(upgraded)
+    
+    // Save to history
+    const newItem: HistoryItem = {
+      id: Date.now().toString(),
+      original: inputText,
+      upgraded: upgraded,
+      tone: selectedTone,
+      timestamp: Date.now()
     }
-  }
-
-  const replaceWord = (newWord: string) => {
-    if (!textareaRef.current || !selectedWord) return
     
-    const text = textareaRef.current.value
-    const newText = text.replace(new RegExp(`\\b${selectedWord}\\b`, 'gi'), newWord)
-    setInputText(newText)
-    
-    // Add to history
-    const newHistory = [
-      { original: selectedWord, replacement: newWord, timestamp: Date.now() },
-      ...history.slice(0, 19)
-    ]
+    const newHistory = [newItem, ...history.slice(0, 19)]
     setHistory(newHistory)
-    localStorage.setItem('vocab_history', JSON.stringify(newHistory))
+    localStorage.setItem('vocab-upgrade-history', JSON.stringify(newHistory))
+  }
+
+  const copyToClipboard = async (text: string, type: 'input' | 'output') => {
+    await navigator.clipboard.writeText(text)
+    setCopiedText(type)
+    setTimeout(() => setCopiedText(null), 2000)
+  }
+
+  const clearAll = () => {
+    setInputText('')
+    setUpgradedText('')
+  }
+
+  const toggleFavorite = (id: string) => {
+    const updated = history.map(item => 
+      item.id === id ? { ...item, favorite: !item.favorite } : item
+    )
+    setHistory(updated)
+    localStorage.setItem('vocab-upgrade-history', JSON.stringify(updated))
+  }
+
+  const deleteHistoryItem = (id: string) => {
+    const updated = history.filter(item => item.id !== id)
+    setHistory(updated)
+    localStorage.setItem('vocab-upgrade-history', JSON.stringify(updated))
+  }
+
+  const loadFromHistory = (item: HistoryItem) => {
+    setInputText(item.original)
+    setUpgradedText(item.upgraded)
+    setSelectedTone(item.tone)
+    setShowHistory(false)
+  }
+
+  const exportText = (format: 'txt' | 'md' | 'both') => {
+    let content = ''
+    const filename = `upgraded-text-${new Date().toISOString().split('T')[0]}`
     
-    setSelectedWord('')
-    setSuggestions([])
+    if (format === 'txt') {
+      content = upgradedText
+      downloadFile(content, `${filename}.txt`, 'text/plain')
+    } else if (format === 'md') {
+      content = `# Upgraded Text\n\n## Original\n\n${inputText}\n\n## Upgraded (${selectedTone})\n\n${upgradedText}`
+      downloadFile(content, `${filename}.md`, 'text/markdown')
+    } else {
+      content = `Original:\n${inputText}\n\n---\n\nUpgraded (${selectedTone}):\n${upgradedText}`
+      downloadFile(content, `${filename}.txt`, 'text/plain')
+    }
+    
+    setShowExport(false)
   }
 
-  const copyToClipboard = async (word: string) => {
-    await navigator.clipboard.writeText(word)
-    setCopiedWord(word)
-    setTimeout(() => setCopiedWord(null), 2000)
+  const downloadFile = (content: string, filename: string, type: string) => {
+    const blob = new Blob([content], { type })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
-  const toggleFavorite = (word: string) => {
-    const newFavorites = favorites.includes(word)
-      ? favorites.filter(f => f !== word)
-      : [...favorites, word]
-    setFavorites(newFavorites)
-    localStorage.setItem('vocab_favorites', JSON.stringify(newFavorites))
-  }
-
-  const clearHistory = () => {
-    setHistory([])
-    localStorage.removeItem('vocab_history')
-  }
-
-  const commonUpgrades = [
-    { basic: 'good', upgrades: ['excellent', 'outstanding', 'exceptional'] },
-    { basic: 'bad', upgrades: ['poor', 'inadequate', 'substandard'] },
-    { basic: 'big', upgrades: ['substantial', 'significant', 'considerable'] },
-    { basic: 'small', upgrades: ['minimal', 'modest', 'negligible'] },
-    { basic: 'important', upgrades: ['crucial', 'essential', 'vital'] },
-    { basic: 'difficult', upgrades: ['challenging', 'demanding', 'arduous'] },
-    { basic: 'use', upgrades: ['utilize', 'employ', 'leverage'] },
-    { basic: 'help', upgrades: ['assist', 'facilitate', 'support'] },
-    { basic: 'show', upgrades: ['demonstrate', 'illustrate', 'reveal'] },
-    { basic: 'make', upgrades: ['create', 'develop', 'establish'] },
-  ]
+  const availableWords = getAvailableWords()
+  const weakWords = getWeakWords()
 
   if (!mounted) {
     return (
@@ -133,228 +159,328 @@ export default function UpgradePage() {
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="font-display text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Word Upgrader
+        <h1 className="font-display text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Advanced <span className="gradient-text">Text Upgrader</span>
         </h1>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Paste your text, select a word to upgrade, and choose a more sophisticated alternative
+          Transform your writing with sophisticated vocabulary. Paste text, choose your tone, 
+          and watch weak words become powerful alternatives.
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Main Editor */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl border border-gray-200/50 dark:border-gray-800/50 overflow-hidden">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-accent-500" />
-                <span className="font-medium text-gray-900 dark:text-white">Your Text</span>
-              </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                Select a word to see suggestions
-              </span>
-            </div>
-            <textarea
-              ref={textareaRef}
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onSelect={handleTextSelect}
-              onMouseUp={handleTextSelect}
-              placeholder="Paste or type your text here. Then select any word to find better alternatives...
+      {/* Tone Selector */}
+      <div className="flex items-center justify-center gap-2 flex-wrap">
+        <span className="text-sm text-gray-600 dark:text-gray-400 mr-2">Writing tone:</span>
+        {(Object.keys(toneDescriptions) as Tone[]).map((tone) => {
+          const Icon = toneIcons[tone]
+          return (
+            <button
+              key={tone}
+              onClick={() => setSelectedTone(tone)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                selectedTone === tone
+                  ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-primary-300'
+              }`}
+              title={toneDescriptions[tone]}
+            >
+              <Icon className="w-4 h-4" />
+              <span>{tone.charAt(0).toUpperCase() + tone.slice(1)}</span>
+            </button>
+          )
+        })}
+      </div>
 
-Example: This is a good idea that could help make things better."
-              className="w-full h-64 p-6 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 resize-none focus:outline-none text-lg leading-relaxed"
-            />
+      {/* Stats Bar */}
+      <div className="flex items-center justify-center gap-6 flex-wrap text-sm">
+        <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+          <FileText className="w-4 h-4 text-gray-500" />
+          <span className="text-gray-700 dark:text-gray-300">{writingScore.totalWords} words</span>
+        </div>
+        
+        {writingScore.weakWordCount > 0 && (
+          <div className="flex items-center gap-2 px-4 py-2 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/50">
+            <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <span className="text-amber-700 dark:text-amber-300">{writingScore.weakWordCount} weak words</span>
           </div>
+        )}
+        
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-xl border ${
+          writingScore.score >= 80 
+            ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/50' 
+            : writingScore.score >= 50 
+            ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/50'
+            : 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800/50'
+        }`}>
+          <BarChart3 className={`w-4 h-4 ${
+            writingScore.score >= 80 
+              ? 'text-emerald-600 dark:text-emerald-400' 
+              : writingScore.score >= 50 
+              ? 'text-amber-600 dark:text-amber-400'
+              : 'text-rose-600 dark:text-rose-400'
+          }`} />
+          <span className={`font-semibold ${
+            writingScore.score >= 80 
+              ? 'text-emerald-700 dark:text-emerald-300' 
+              : writingScore.score >= 50 
+              ? 'text-amber-700 dark:text-amber-300'
+              : 'text-rose-700 dark:text-rose-300'
+          }`}>{writingScore.score} score</span>
+        </div>
+      </div>
 
-          {/* Selected Word & Suggestions */}
-          {selectedWord && (
-            <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-200/50 dark:border-gray-800/50 animate-fade-in">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-accent-500" />
-                  <span className="text-gray-700 dark:text-gray-300">
-                    Upgrades for <span className="font-bold text-primary-600 dark:text-primary-400">&ldquo;{selectedWord}&rdquo;</span>
-                  </span>
-                </div>
+      {/* Main Editor */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* Input */}
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl border border-gray-200/50 dark:border-gray-800/50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700/50 bg-gray-50 dark:bg-gray-800/30">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Original Text</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => copyToClipboard(inputText, 'input')}
+                disabled={!inputText}
+                className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-50"
+                title="Copy"
+              >
+                {copiedText === 'input' ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+              </button>
+              <button
+                onClick={clearAll}
+                disabled={!inputText}
+                className="p-2 text-gray-500 hover:text-rose-500 disabled:opacity-50"
+                title="Clear"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+          
+          <textarea
+            ref={textareaRef}
+            value={inputText}
+            onChange={(e) => {
+              setInputText(e.target.value)
+              setUpgradedText('')
+            }}
+            placeholder="Paste or type your text here. Weak words will be highlighted and upgraded..."
+            className="w-full h-80 p-4 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 resize-none focus:outline-none"
+          />
+        </div>
+
+        {/* Output */}
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl border border-gray-200/50 dark:border-gray-800/50 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700/50 bg-gradient-to-r from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Upgraded Text</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => copyToClipboard(upgradedText, 'output')}
+                disabled={!upgradedText}
+                className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-50"
+                title="Copy"
+              >
+                {copiedText === 'output' ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+              </button>
+              <div className="relative">
                 <button
-                  onClick={() => setSelectedWord('')}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  onClick={() => setShowExport(!showExport)}
+                  disabled={!upgradedText}
+                  className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-50"
+                  title="Export"
                 >
-                  ✕
+                  <Download className="w-4 h-4" />
                 </button>
-              </div>
-
-              {suggestions.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {suggestions.map((word) => (
+                {showExport && (
+                  <div className="absolute right-0 top-full mt-2 w-40 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-10">
                     <button
-                      key={word}
-                      onClick={() => replaceWord(word)}
-                      className="group relative p-4 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-xl border border-primary-100 dark:border-primary-800/50 hover:shadow-lg hover:scale-105 transition-all text-left"
+                      onClick={() => exportText('txt')}
+                      className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {word}
-                      </span>
-                      <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(word)
-                          }}
-                          className="p-1 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded"
-                        >
-                          <Star
-                            className={`w-4 h-4 ${
-                              favorites.includes(word)
-                                ? 'fill-accent-500 text-accent-500'
-                                : 'text-gray-400'
-                            }`}
-                          />
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            copyToClipboard(word)
-                          }}
-                          className="p-1 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded"
-                        >
-                          {copiedWord === word ? (
-                            <Check className="w-4 h-4 text-emerald-500" />
-                          ) : (
-                            <Copy className="w-4 h-4 text-gray-400" />
-                          )}
-                        </button>
-                      </div>
-                      <p className="text-xs text-primary-600 dark:text-primary-400 mt-1">
-                        Click to replace
-                      </p>
+                      Export as .txt
                     </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                  <p>No suggestions found for this word</p>
-                  <p className="text-sm mt-1">Try selecting a more common word</p>
-                </div>
-              )}
+                    <button
+                      onClick={() => exportText('md')}
+                      className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Export as .md
+                    </button>
+                    <button
+                      onClick={() => exportText('both')}
+                      className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Both versions
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          </div>
+          
+          <div className="h-80 p-4 overflow-y-auto">
+            {upgradedText ? (
+              <p className="text-gray-900 dark:text-white whitespace-pre-wrap">{upgradedText}</p>
+            ) : (
+              <p className="text-gray-400 dark:text-gray-500">
+                Click &ldquo;Upgrade Text&rdquo; to see the improved version with {selectedTone} vocabulary
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
 
-          {/* Quick Reference */}
-          <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-200/50 dark:border-gray-800/50">
-            <div className="flex items-center gap-2 mb-4">
-              <BookOpen className="w-5 h-5 text-emerald-500" />
-              <span className="font-medium text-gray-900 dark:text-white">Quick Reference</span>
+      {/* Suggestions */}
+      {writingScore.suggestions.length > 0 && !upgradedText && (
+        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-5 border border-amber-100 dark:border-amber-800/50">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+            <span className="font-medium text-amber-800 dark:text-amber-200">Quick Suggestions</span>
+          </div>
+          <ul className="grid sm:grid-cols-2 gap-2 text-sm text-amber-700 dark:text-amber-300">
+            {writingScore.suggestions.map((suggestion, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-amber-400">•</span>
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Action Buttons */}
+      <div className="flex items-center justify-center gap-4 flex-wrap">
+        <button
+          onClick={handleUpgrade}
+          disabled={!inputText.trim()}
+          className={`flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all ${
+            inputText.trim()
+              ? 'bg-primary-500 hover:bg-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-xl'
+              : 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
+          }`}
+        >
+          <Zap className="w-5 h-5" />
+          Upgrade to {selectedTone.charAt(0).toUpperCase() + selectedTone.slice(1)}
+        </button>
+        
+        <button
+          onClick={() => setShowHistory(!showHistory)}
+          className="flex items-center gap-2 px-6 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-xl font-medium hover:border-primary-300 transition-all"
+        >
+          <History className="w-5 h-5" />
+          History ({history.length})
+          <ChevronDown className={`w-4 h-4 transition-transform ${showHistory ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
+
+      {/* History Panel */}
+      {showHistory && (
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl border border-gray-200/50 dark:border-gray-800/50 overflow-hidden">
+          <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700/50 bg-gray-50 dark:bg-gray-800/30">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Recent Upgrades</span>
+          </div>
+          
+          {history.length === 0 ? (
+            <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+              <Clock className="w-8 h-8 mx-auto mb-2 opacity-50" />
+              <p>No history yet. Start upgrading text!</p>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {commonUpgrades.map(({ basic, upgrades }) => (
-                <div key={basic} className="flex items-center gap-3">
-                  <span className="text-gray-500 dark:text-gray-400 w-20 font-medium">{basic}</span>
-                  <ArrowRight className="w-4 h-4 text-gray-300 dark:text-gray-600" />
-                  <div className="flex flex-wrap gap-1">
-                    {upgrades.map((word) => (
+          ) : (
+            <div className="divide-y divide-gray-100 dark:divide-gray-800">
+              {history.map((item) => (
+                <div key={item.id} className="p-4 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
+                          {item.tone}
+                        </span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          {new Date(item.timestamp).toLocaleString()}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{item.original}</p>
+                      <p className="text-sm text-gray-900 dark:text-white mt-1 line-clamp-2">{item.upgraded}</p>
+                    </div>
+                    <div className="flex items-center gap-1">
                       <button
-                        key={word}
-                        onClick={() => copyToClipboard(word)}
-                        className="px-2 py-0.5 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 rounded text-sm hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors"
+                        onClick={() => toggleFavorite(item.id)}
+                        className="p-2 text-gray-400 hover:text-amber-500 transition-colors"
                       >
-                        {word}
+                        {item.favorite ? <Star className="w-4 h-4 fill-amber-500 text-amber-500" /> : <StarOff className="w-4 h-4" />}
                       </button>
-                    ))}
+                      <button
+                        onClick={() => loadFromHistory(item)}
+                        className="p-2 text-gray-400 hover:text-primary-500 transition-colors"
+                      >
+                        <RotateCcw className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => deleteHistoryItem(item.id)}
+                        className="p-2 text-gray-400 hover:text-rose-500 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Sidebar */}
-        <div className="space-y-4">
-          {/* Favorites */}
-          {favorites.length > 0 && (
-            <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-5 border border-gray-200/50 dark:border-gray-800/50">
-              <div className="flex items-center gap-2 mb-4">
-                <Star className="w-5 h-5 text-accent-500 fill-accent-500" />
-                <span className="font-medium text-gray-900 dark:text-white">Favorites</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {favorites.map((word) => (
-                  <button
-                    key={word}
-                    onClick={() => copyToClipboard(word)}
-                    className="group relative px-3 py-1.5 bg-accent-50 dark:bg-accent-900/20 text-accent-700 dark:text-accent-300 rounded-lg text-sm hover:bg-accent-100 dark:hover:bg-accent-900/40 transition-colors"
-                  >
-                    {word}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(word)
-                      }}
-                      className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      ✕
-                    </button>
-                  </button>
-                ))}
-              </div>
-            </div>
           )}
+        </div>
+      )}
 
-          {/* History */}
-          <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-5 border border-gray-200/50 dark:border-gray-800/50">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <History className="w-5 h-5 text-blue-500" />
-                <span className="font-medium text-gray-900 dark:text-white">Recent Upgrades</span>
-              </div>
-              {history.length > 0 && (
-                <button
-                  onClick={clearHistory}
-                  className="text-gray-400 hover:text-rose-500 transition-colors"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-            
-            {history.length > 0 ? (
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {history.slice(0, 10).map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-sm"
-                  >
-                    <span className="text-gray-500 dark:text-gray-400 line-through">
-                      {item.original}
-                    </span>
-                    <ArrowRight className="w-3 h-3 text-gray-300 dark:text-gray-600" />
-                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">
-                      {item.replacement}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
-                No upgrades yet. Select a word in your text to get started!
-              </p>
-            )}
-          </div>
-
-          {/* Tips */}
-          <div className="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-5 border border-primary-100 dark:border-primary-800/50">
-            <h3 className="font-medium text-gray-900 dark:text-white mb-3">💡 Tips</h3>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li>• Select any word by highlighting it</li>
-              <li>• Click a suggestion to replace instantly</li>
-              <li>• Star words to save them for later</li>
-              <li>• Try the Chrome extension for inline suggestions</li>
-            </ul>
+      {/* Reference Section */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Supported Words */}
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-200/50 dark:border-gray-800/50">
+          <h3 className="font-display text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Supported Words ({availableWords.length})
+          </h3>
+          <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
+            {availableWords.map((word) => (
+              <span
+                key={word}
+                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm"
+              >
+                {word}
+              </span>
+            ))}
           </div>
         </div>
+
+        {/* Weak Words */}
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 border border-gray-200/50 dark:border-gray-800/50">
+          <h3 className="font-display text-lg font-bold text-gray-900 dark:text-white mb-4">
+            Weak Words to Avoid ({weakWords.length})
+          </h3>
+          <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
+            {weakWords.map((word) => (
+              <span
+                key={word}
+                className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-lg text-sm"
+              >
+                {word}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Download Extension CTA */}
+      <div className="bg-gradient-to-r from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 rounded-2xl p-6 border border-primary-200 dark:border-primary-800/50 text-center">
+        <ArrowDownToLine className="w-8 h-8 text-primary-600 dark:text-primary-400 mx-auto mb-3" />
+        <h3 className="font-display text-xl font-bold text-gray-900 dark:text-white mb-2">
+          Get the Chrome Extension
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
+          Upgrade your vocabulary directly while typing in Gmail, Google Docs, and more!
+        </p>
+        <a
+          href="/#get-extension"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-600 transition-colors"
+        >
+          <Download className="w-5 h-5" />
+          Download Free
+        </a>
       </div>
     </div>
   )
 }
-

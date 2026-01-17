@@ -1,0 +1,500 @@
+{
+  "words": {
+    "good": {
+      "formal": ["excellent", "outstanding", "exceptional", "superior", "exemplary"],
+      "academic": ["commendable", "meritorious", "praiseworthy", "laudable", "creditable"],
+      "business": ["favorable", "advantageous", "beneficial", "profitable", "productive"],
+      "casual": ["great", "awesome", "fantastic", "terrific", "wonderful"]
+    },
+    "bad": {
+      "formal": ["poor", "inadequate", "substandard", "inferior", "deficient"],
+      "academic": ["detrimental", "adverse", "unfavorable", "deleterious", "pernicious"],
+      "business": ["unsatisfactory", "unacceptable", "problematic", "suboptimal", "disappointing"],
+      "casual": ["terrible", "awful", "lousy", "crummy", "rough"]
+    },
+    "big": {
+      "formal": ["substantial", "considerable", "significant", "extensive", "sizable"],
+      "academic": ["considerable", "substantial", "appreciable", "marked", "pronounced"],
+      "business": ["major", "large-scale", "significant", "considerable", "substantial"],
+      "casual": ["huge", "massive", "enormous", "giant", "tremendous"]
+    },
+    "small": {
+      "formal": ["modest", "minimal", "limited", "minor", "slight"],
+      "academic": ["negligible", "marginal", "nominal", "trivial", "inconsequential"],
+      "business": ["minor", "modest", "limited", "compact", "streamlined"],
+      "casual": ["tiny", "little", "mini", "teeny", "slight"]
+    },
+    "important": {
+      "formal": ["crucial", "essential", "vital", "critical", "paramount"],
+      "academic": ["significant", "pivotal", "fundamental", "consequential", "seminal"],
+      "business": ["key", "strategic", "priority", "mission-critical", "high-impact"],
+      "casual": ["big deal", "major", "key", "crucial", "vital"]
+    },
+    "difficult": {
+      "formal": ["challenging", "demanding", "arduous", "formidable", "complex"],
+      "academic": ["intricate", "complicated", "convoluted", "multifaceted", "nuanced"],
+      "business": ["challenging", "demanding", "resource-intensive", "complex", "ambitious"],
+      "casual": ["tough", "hard", "tricky", "rough", "intense"]
+    },
+    "easy": {
+      "formal": ["straightforward", "uncomplicated", "manageable", "accessible", "attainable"],
+      "academic": ["elementary", "rudimentary", "fundamental", "basic", "introductory"],
+      "business": ["streamlined", "efficient", "user-friendly", "intuitive", "seamless"],
+      "casual": ["simple", "breeze", "piece of cake", "no-brainer", "cinch"]
+    },
+    "fast": {
+      "formal": ["rapid", "swift", "expedient", "prompt", "accelerated"],
+      "academic": ["expeditious", "precipitate", "hasty", "immediate", "instantaneous"],
+      "business": ["efficient", "streamlined", "agile", "responsive", "quick-turnaround"],
+      "casual": ["quick", "speedy", "snappy", "zippy", "lightning-fast"]
+    },
+    "slow": {
+      "formal": ["gradual", "deliberate", "measured", "unhurried", "leisurely"],
+      "academic": ["protracted", "prolonged", "incremental", "methodical", "systematic"],
+      "business": ["conservative", "phased", "gradual", "measured", "cautious"],
+      "casual": ["sluggish", "poky", "lazy", "dawdling", "unhurried"]
+    },
+    "use": {
+      "formal": ["utilize", "employ", "leverage", "implement", "apply"],
+      "academic": ["utilize", "employ", "apply", "implement", "operationalize"],
+      "business": ["leverage", "deploy", "implement", "harness", "capitalize on"],
+      "casual": ["work with", "go with", "try", "pick", "grab"]
+    },
+    "make": {
+      "formal": ["create", "develop", "establish", "construct", "formulate"],
+      "academic": ["generate", "produce", "synthesize", "devise", "construct"],
+      "business": ["develop", "build", "launch", "establish", "create"],
+      "casual": ["put together", "whip up", "come up with", "build", "craft"]
+    },
+    "change": {
+      "formal": ["modify", "alter", "adjust", "transform", "revise"],
+      "academic": ["modify", "amend", "revise", "transform", "reconceptualize"],
+      "business": ["optimize", "refine", "update", "restructure", "pivot"],
+      "casual": ["switch up", "mix up", "tweak", "shake up", "flip"]
+    },
+    "fix": {
+      "formal": ["resolve", "rectify", "remedy", "address", "correct"],
+      "academic": ["rectify", "remediate", "ameliorate", "redress", "mitigate"],
+      "business": ["resolve", "address", "troubleshoot", "debug", "optimize"],
+      "casual": ["sort out", "patch up", "work out", "deal with", "handle"]
+    },
+    "help": {
+      "formal": ["assist", "facilitate", "support", "aid", "enable"],
+      "academic": ["facilitate", "foster", "promote", "contribute to", "enhance"],
+      "business": ["support", "enable", "empower", "drive", "accelerate"],
+      "casual": ["give a hand", "pitch in", "back up", "chip in", "lend support"]
+    },
+    "show": {
+      "formal": ["demonstrate", "illustrate", "reveal", "exhibit", "present"],
+      "academic": ["illustrate", "elucidate", "exemplify", "manifest", "substantiate"],
+      "business": ["showcase", "highlight", "present", "display", "feature"],
+      "casual": ["point out", "bring up", "lay out", "spell out", "break down"]
+    },
+    "get": {
+      "formal": ["obtain", "acquire", "secure", "procure", "attain"],
+      "academic": ["obtain", "acquire", "derive", "extract", "ascertain"],
+      "business": ["secure", "acquire", "capture", "gain", "achieve"],
+      "casual": ["grab", "snag", "score", "pick up", "land"]
+    },
+    "think": {
+      "formal": ["consider", "contemplate", "evaluate", "assess", "deliberate"],
+      "academic": ["hypothesize", "theorize", "postulate", "conceptualize", "analyze"],
+      "business": ["assess", "evaluate", "analyze", "strategize", "envision"],
+      "casual": ["figure", "reckon", "guess", "suppose", "imagine"]
+    },
+    "say": {
+      "formal": ["state", "express", "articulate", "convey", "communicate"],
+      "academic": ["assert", "contend", "posit", "maintain", "argue"],
+      "business": ["communicate", "convey", "articulate", "present", "relay"],
+      "casual": ["mention", "bring up", "point out", "note", "share"]
+    },
+    "tell": {
+      "formal": ["inform", "notify", "advise", "apprise", "communicate"],
+      "academic": ["convey", "impart", "disclose", "relay", "disseminate"],
+      "business": ["brief", "update", "inform", "notify", "advise"],
+      "casual": ["fill in", "clue in", "let know", "give the lowdown", "spill"]
+    },
+    "ask": {
+      "formal": ["inquire", "request", "query", "solicit", "petition"],
+      "academic": ["inquire", "investigate", "probe", "examine", "explore"],
+      "business": ["request", "propose", "submit", "seek", "solicit"],
+      "casual": ["hit up", "check with", "run by", "bounce off", "pick brain"]
+    },
+    "give": {
+      "formal": ["provide", "offer", "supply", "deliver", "present"],
+      "academic": ["provide", "furnish", "supply", "confer", "bestow"],
+      "business": ["deliver", "provide", "allocate", "distribute", "dispense"],
+      "casual": ["hand over", "pass along", "dish out", "fork over", "share"]
+    },
+    "take": {
+      "formal": ["acquire", "obtain", "accept", "receive", "procure"],
+      "academic": ["appropriate", "assume", "adopt", "embrace", "undertake"],
+      "business": ["assume", "acquire", "secure", "capture", "seize"],
+      "casual": ["grab", "snag", "nab", "swipe", "scoop up"]
+    },
+    "see": {
+      "formal": ["observe", "perceive", "notice", "witness", "discern"],
+      "academic": ["observe", "perceive", "identify", "recognize", "detect"],
+      "business": ["identify", "recognize", "spot", "detect", "uncover"],
+      "casual": ["spot", "catch", "notice", "check out", "scope out"]
+    },
+    "know": {
+      "formal": ["understand", "comprehend", "recognize", "acknowledge", "appreciate"],
+      "academic": ["comprehend", "discern", "perceive", "cognize", "apprehend"],
+      "business": ["understand", "recognize", "be aware of", "be familiar with", "be versed in"],
+      "casual": ["get", "grasp", "pick up on", "be hip to", "be clued in"]
+    },
+    "want": {
+      "formal": ["desire", "seek", "wish", "aspire to", "prefer"],
+      "academic": ["desire", "aspire to", "endeavor", "pursue", "seek"],
+      "business": ["aim for", "target", "pursue", "seek", "strive for"],
+      "casual": ["be after", "be dying for", "crave", "go for", "be keen on"]
+    },
+    "need": {
+      "formal": ["require", "necessitate", "demand", "call for", "warrant"],
+      "academic": ["require", "necessitate", "entail", "presuppose", "mandate"],
+      "business": ["require", "demand", "call for", "depend on", "rely on"],
+      "casual": ["gotta have", "can't do without", "must have", "be desperate for"]
+    },
+    "try": {
+      "formal": ["attempt", "endeavor", "strive", "undertake", "pursue"],
+      "academic": ["attempt", "endeavor", "essay", "venture", "experiment"],
+      "business": ["pilot", "test", "explore", "pursue", "experiment with"],
+      "casual": ["give it a shot", "take a crack at", "have a go", "give it a whirl"]
+    },
+    "work": {
+      "formal": ["function", "operate", "perform", "execute", "serve"],
+      "academic": ["function", "operate", "perform", "serve", "fulfill"],
+      "business": ["perform", "deliver", "execute", "produce", "function"],
+      "casual": ["do the trick", "pan out", "click", "gel", "come together"]
+    },
+    "find": {
+      "formal": ["discover", "locate", "identify", "uncover", "determine"],
+      "academic": ["discover", "ascertain", "identify", "determine", "establish"],
+      "business": ["identify", "uncover", "detect", "pinpoint", "source"],
+      "casual": ["stumble on", "dig up", "track down", "come across", "hit upon"]
+    },
+    "keep": {
+      "formal": ["maintain", "preserve", "retain", "sustain", "uphold"],
+      "academic": ["maintain", "preserve", "sustain", "perpetuate", "conserve"],
+      "business": ["maintain", "retain", "sustain", "preserve", "safeguard"],
+      "casual": ["hang onto", "hold onto", "stick with", "stay with"]
+    },
+    "start": {
+      "formal": ["initiate", "commence", "launch", "inaugurate", "embark on"],
+      "academic": ["initiate", "commence", "inaugurate", "institute", "originate"],
+      "business": ["launch", "kick off", "roll out", "initiate", "spearhead"],
+      "casual": ["kick off", "get going", "fire up", "dive into", "jump into"]
+    },
+    "end": {
+      "formal": ["conclude", "terminate", "finalize", "complete", "cease"],
+      "academic": ["conclude", "terminate", "culminate", "finalize", "discontinue"],
+      "business": ["wrap up", "close", "finalize", "complete", "conclude"],
+      "casual": ["wrap up", "wind down", "call it", "finish up", "knock off"]
+    },
+    "move": {
+      "formal": ["relocate", "transfer", "transition", "proceed", "advance"],
+      "academic": ["transition", "migrate", "shift", "progress", "evolve"],
+      "business": ["transition", "migrate", "shift", "pivot", "realign"],
+      "casual": ["head", "go", "shift", "switch", "bounce"]
+    },
+    "come": {
+      "formal": ["arrive", "approach", "emerge", "materialize", "appear"],
+      "academic": ["emerge", "arise", "materialize", "manifest", "surface"],
+      "business": ["arrive", "emerge", "materialize", "develop", "unfold"],
+      "casual": ["show up", "pop up", "roll in", "swing by", "drop by"]
+    },
+    "go": {
+      "formal": ["proceed", "depart", "advance", "progress", "continue"],
+      "academic": ["proceed", "progress", "advance", "evolve", "develop"],
+      "business": ["proceed", "move forward", "advance", "progress", "continue"],
+      "casual": ["head out", "take off", "bounce", "split", "jet"]
+    },
+    "run": {
+      "formal": ["operate", "manage", "administer", "conduct", "oversee"],
+      "academic": ["conduct", "execute", "administer", "perform", "implement"],
+      "business": ["manage", "operate", "oversee", "lead", "direct"],
+      "casual": ["handle", "be in charge of", "head up", "take care of"]
+    },
+    "put": {
+      "formal": ["place", "position", "situate", "deposit", "establish"],
+      "academic": ["position", "situate", "locate", "place", "install"],
+      "business": ["position", "place", "allocate", "deploy", "invest"],
+      "casual": ["stick", "plop", "set", "drop", "park"]
+    },
+    "look": {
+      "formal": ["examine", "inspect", "observe", "review", "scrutinize"],
+      "academic": ["examine", "analyze", "investigate", "survey", "assess"],
+      "business": ["review", "assess", "evaluate", "examine", "analyze"],
+      "casual": ["check out", "scope out", "peek at", "glance at", "eye"]
+    },
+    "very": {
+      "formal": ["exceptionally", "remarkably", "particularly", "extremely", "notably"],
+      "academic": ["exceedingly", "considerably", "substantially", "profoundly", "markedly"],
+      "business": ["highly", "significantly", "extremely", "tremendously", "particularly"],
+      "casual": ["super", "really", "totally", "seriously", "crazy"]
+    },
+    "many": {
+      "formal": ["numerous", "multiple", "various", "several", "abundant"],
+      "academic": ["numerous", "myriad", "multitudinous", "manifold", "copious"],
+      "business": ["numerous", "multiple", "various", "several", "extensive"],
+      "casual": ["tons of", "loads of", "bunch of", "heap of", "lots of"]
+    },
+    "few": {
+      "formal": ["limited", "scarce", "sparse", "minimal", "select"],
+      "academic": ["scant", "sparse", "limited", "meager", "negligible"],
+      "business": ["limited", "select", "targeted", "specific", "narrow"],
+      "casual": ["handful of", "couple of", "not many", "barely any"]
+    },
+    "new": {
+      "formal": ["novel", "innovative", "contemporary", "modern", "recent"],
+      "academic": ["novel", "emergent", "nascent", "innovative", "groundbreaking"],
+      "business": ["innovative", "cutting-edge", "next-generation", "fresh", "modern"],
+      "casual": ["fresh", "latest", "brand-new", "hot", "up-and-coming"]
+    },
+    "old": {
+      "formal": ["established", "traditional", "longstanding", "legacy", "previous"],
+      "academic": ["antecedent", "prior", "preceding", "former", "historical"],
+      "business": ["legacy", "established", "traditional", "mature", "existing"],
+      "casual": ["dated", "vintage", "classic", "ancient", "outdated"]
+    },
+    "different": {
+      "formal": ["distinct", "diverse", "varied", "alternative", "dissimilar"],
+      "academic": ["disparate", "divergent", "heterogeneous", "discrete", "differentiated"],
+      "business": ["alternative", "distinct", "unique", "differentiated", "varied"],
+      "casual": ["other", "another", "fresh", "unique", "unlike"]
+    },
+    "same": {
+      "formal": ["identical", "equivalent", "uniform", "consistent", "matching"],
+      "academic": ["identical", "congruent", "homogeneous", "analogous", "corresponding"],
+      "business": ["consistent", "aligned", "uniform", "standardized", "equivalent"],
+      "casual": ["alike", "matching", "equal", "similar", "like"]
+    },
+    "problem": {
+      "formal": ["issue", "challenge", "difficulty", "complication", "obstacle"],
+      "academic": ["challenge", "dilemma", "predicament", "conundrum", "quandary"],
+      "business": ["challenge", "issue", "obstacle", "bottleneck", "pain point"],
+      "casual": ["snag", "hiccup", "headache", "hassle", "mess"]
+    },
+    "thing": {
+      "formal": ["matter", "element", "aspect", "factor", "component"],
+      "academic": ["phenomenon", "entity", "element", "construct", "variable"],
+      "business": ["item", "element", "factor", "aspect", "deliverable"],
+      "casual": ["stuff", "deal", "bit", "piece", "whatever"]
+    },
+    "way": {
+      "formal": ["method", "approach", "manner", "means", "procedure"],
+      "academic": ["methodology", "approach", "framework", "paradigm", "modality"],
+      "business": ["approach", "strategy", "method", "process", "framework"],
+      "casual": ["how", "style", "trick", "move", "angle"]
+    },
+    "place": {
+      "formal": ["location", "site", "venue", "area", "position"],
+      "academic": ["locale", "setting", "context", "environment", "domain"],
+      "business": ["location", "site", "venue", "facility", "space"],
+      "casual": ["spot", "joint", "hangout", "digs", "pad"]
+    },
+    "time": {
+      "formal": ["period", "duration", "interval", "occasion", "moment"],
+      "academic": ["period", "epoch", "era", "juncture", "interval"],
+      "business": ["timeframe", "timeline", "window", "phase", "period"],
+      "casual": ["bit", "while", "sec", "minute", "moment"]
+    },
+    "part": {
+      "formal": ["component", "element", "segment", "portion", "section"],
+      "academic": ["constituent", "element", "component", "facet", "dimension"],
+      "business": ["component", "segment", "division", "unit", "module"],
+      "casual": ["piece", "bit", "chunk", "slice", "section"]
+    },
+    "people": {
+      "formal": ["individuals", "persons", "personnel", "stakeholders", "parties"],
+      "academic": ["individuals", "subjects", "participants", "respondents", "population"],
+      "business": ["stakeholders", "team members", "personnel", "clients", "customers"],
+      "casual": ["folks", "guys", "crew", "gang", "bunch"]
+    },
+    "really": {
+      "formal": ["genuinely", "truly", "indeed", "certainly", "undoubtedly"],
+      "academic": ["indeed", "fundamentally", "essentially", "substantively", "veritably"],
+      "business": ["truly", "genuinely", "absolutely", "definitely", "certainly"],
+      "casual": ["totally", "seriously", "honestly", "legit", "for real"]
+    },
+    "actually": {
+      "formal": ["in fact", "indeed", "in reality", "in truth", "as a matter of fact"],
+      "academic": ["in fact", "empirically", "substantively", "demonstrably", "verifiably"],
+      "business": ["in fact", "in practice", "effectively", "operationally", "realistically"],
+      "casual": ["tbh", "for real", "no joke", "straight up", "low-key"]
+    },
+    "basically": {
+      "formal": ["fundamentally", "essentially", "primarily", "principally", "chiefly"],
+      "academic": ["fundamentally", "essentially", "intrinsically", "inherently", "at its core"],
+      "business": ["essentially", "fundamentally", "at its core", "in essence", "primarily"],
+      "casual": ["pretty much", "more or less", "kind of", "sort of", "like"]
+    },
+    "just": {
+      "formal": ["merely", "simply", "solely", "only", "precisely"],
+      "academic": ["merely", "simply", "exclusively", "solely", "specifically"],
+      "business": ["simply", "only", "precisely", "specifically", "exactly"],
+      "casual": ["only", "like", "kinda", "sorta", "barely"]
+    },
+    "always": {
+      "formal": ["consistently", "invariably", "perpetually", "continually", "unfailingly"],
+      "academic": ["invariably", "consistently", "perpetually", "universally", "without exception"],
+      "business": ["consistently", "reliably", "dependably", "without fail", "at all times"],
+      "casual": ["every time", "24/7", "non-stop", "forever", "no matter what"]
+    },
+    "never": {
+      "formal": ["at no time", "under no circumstances", "by no means", "not ever", "in no way"],
+      "academic": ["at no point", "under no condition", "in no instance", "without exception"],
+      "business": ["under no circumstances", "at no time", "not under any condition"],
+      "casual": ["no way", "not a chance", "nope", "forget it", "not happening"]
+    },
+    "however": {
+      "formal": ["nevertheless", "nonetheless", "yet", "conversely", "on the other hand"],
+      "academic": ["nevertheless", "notwithstanding", "conversely", "contrastingly", "alternatively"],
+      "business": ["that said", "nevertheless", "on the other hand", "alternatively", "conversely"],
+      "casual": ["but", "still", "though", "then again", "that said"]
+    },
+    "also": {
+      "formal": ["additionally", "furthermore", "moreover", "likewise", "similarly"],
+      "academic": ["furthermore", "moreover", "additionally", "correspondingly", "concurrently"],
+      "business": ["additionally", "furthermore", "in addition", "as well as", "along with"],
+      "casual": ["plus", "too", "on top of that", "and", "as well"]
+    },
+    "because": {
+      "formal": ["due to", "owing to", "given that", "since", "as a result of"],
+      "academic": ["given that", "considering that", "in light of", "owing to", "as a consequence of"],
+      "business": ["due to", "as a result of", "driven by", "attributed to", "stemming from"],
+      "casual": ["since", "'cause", "seeing as", "on account of", "thanks to"]
+    },
+    "but": {
+      "formal": ["however", "nevertheless", "yet", "although", "conversely"],
+      "academic": ["however", "nevertheless", "notwithstanding", "albeit", "whereas"],
+      "business": ["however", "that said", "on the other hand", "nevertheless", "yet"],
+      "casual": ["though", "still", "yet", "then again", "although"]
+    },
+    "so": {
+      "formal": ["therefore", "consequently", "thus", "accordingly", "hence"],
+      "academic": ["therefore", "consequently", "thus", "hence", "as such"],
+      "business": ["therefore", "as a result", "consequently", "accordingly", "thus"],
+      "casual": ["and so", "that's why", "which is why", "meaning", "basically"]
+    },
+    "like": {
+      "formal": ["such as", "similar to", "comparable to", "akin to", "resembling"],
+      "academic": ["such as", "analogous to", "akin to", "reminiscent of", "comparable to"],
+      "business": ["such as", "including", "similar to", "along the lines of", "comparable to"],
+      "casual": ["sorta like", "kind of like", "similar to", "same as", "you know"]
+    },
+    "interesting": {
+      "formal": ["compelling", "intriguing", "noteworthy", "fascinating", "engaging"],
+      "academic": ["notable", "significant", "intriguing", "thought-provoking", "substantive"],
+      "business": ["compelling", "notable", "promising", "attractive", "valuable"],
+      "casual": ["cool", "neat", "wild", "sick", "dope"]
+    },
+    "nice": {
+      "formal": ["pleasant", "agreeable", "delightful", "commendable", "favorable"],
+      "academic": ["favorable", "positive", "beneficial", "constructive", "advantageous"],
+      "business": ["positive", "favorable", "beneficial", "productive", "constructive"],
+      "casual": ["cool", "great", "awesome", "sweet", "solid"]
+    },
+    "amazing": {
+      "formal": ["remarkable", "extraordinary", "exceptional", "outstanding", "impressive"],
+      "academic": ["remarkable", "noteworthy", "exceptional", "unprecedented", "groundbreaking"],
+      "business": ["exceptional", "outstanding", "impressive", "remarkable", "stellar"],
+      "casual": ["awesome", "incredible", "mind-blowing", "insane", "unreal"]
+    }
+  },
+  "phrases": {
+    "a lot of": {
+      "formal": ["numerous", "a substantial amount of", "considerable", "extensive"],
+      "academic": ["a significant quantity of", "numerous", "a substantial number of"],
+      "business": ["significant", "substantial", "considerable", "extensive"],
+      "casual": ["tons of", "loads of", "a bunch of", "plenty of"]
+    },
+    "in order to": {
+      "formal": ["to", "so as to", "with the aim of", "for the purpose of"],
+      "academic": ["to", "with the objective of", "for the purpose of", "aimed at"],
+      "business": ["to", "in an effort to", "with the goal of", "aimed at"],
+      "casual": ["to", "so", "for", "so that"]
+    },
+    "due to the fact that": {
+      "formal": ["because", "since", "given that", "as"],
+      "academic": ["because", "given that", "owing to", "as a result of"],
+      "business": ["because", "since", "due to", "as a result of"],
+      "casual": ["because", "since", "'cause", "seeing as"]
+    },
+    "at this point in time": {
+      "formal": ["currently", "presently", "now", "at present"],
+      "academic": ["currently", "at present", "presently", "at this juncture"],
+      "business": ["currently", "at this stage", "presently", "now"],
+      "casual": ["right now", "now", "at the moment", "these days"]
+    },
+    "for the purpose of": {
+      "formal": ["to", "for", "in order to", "with the aim of"],
+      "academic": ["to", "for", "with the objective of", "aimed at"],
+      "business": ["to", "for", "to achieve", "in support of"],
+      "casual": ["to", "for", "so", "in order to"]
+    },
+    "in the event that": {
+      "formal": ["if", "should", "in case", "provided that"],
+      "academic": ["if", "should", "in the case that", "assuming that"],
+      "business": ["if", "should", "in case", "contingent upon"],
+      "casual": ["if", "in case", "should", "when"]
+    },
+    "with regard to": {
+      "formal": ["regarding", "concerning", "about", "pertaining to"],
+      "academic": ["regarding", "concerning", "with respect to", "pertaining to"],
+      "business": ["regarding", "concerning", "about", "related to"],
+      "casual": ["about", "on", "regarding", "as for"]
+    },
+    "in spite of": {
+      "formal": ["despite", "notwithstanding", "regardless of"],
+      "academic": ["despite", "notwithstanding", "irrespective of"],
+      "business": ["despite", "regardless of", "notwithstanding"],
+      "casual": ["even though", "despite", "even with"]
+    },
+    "as a matter of fact": {
+      "formal": ["indeed", "in fact", "actually", "in reality"],
+      "academic": ["indeed", "in fact", "empirically", "demonstrably"],
+      "business": ["in fact", "actually", "indeed", "as it turns out"],
+      "casual": ["actually", "really", "tbh", "for real"]
+    },
+    "at the end of the day": {
+      "formal": ["ultimately", "in the final analysis", "when all is said and done"],
+      "academic": ["ultimately", "fundamentally", "in conclusion", "essentially"],
+      "business": ["ultimately", "bottom line", "when it comes down to it"],
+      "casual": ["basically", "in the end", "when it's all said and done"]
+    },
+    "on the other hand": {
+      "formal": ["conversely", "alternatively", "however", "in contrast"],
+      "academic": ["conversely", "alternatively", "contrastingly", "by contrast"],
+      "business": ["however", "alternatively", "that said", "conversely"],
+      "casual": ["but then", "then again", "but", "although"]
+    },
+    "as well as": {
+      "formal": ["in addition to", "along with", "together with", "besides"],
+      "academic": ["in addition to", "alongside", "coupled with", "together with"],
+      "business": ["in addition to", "along with", "plus", "combined with"],
+      "casual": ["and", "plus", "along with", "on top of"]
+    },
+    "first of all": {
+      "formal": ["firstly", "to begin with", "initially", "primarily"],
+      "academic": ["firstly", "initially", "to commence", "at the outset"],
+      "business": ["firstly", "to start", "primarily", "initially"],
+      "casual": ["first off", "for starters", "first things first", "to start"]
+    },
+    "last but not least": {
+      "formal": ["finally", "lastly", "in conclusion", "ultimately"],
+      "academic": ["finally", "lastly", "in conclusion", "to conclude"],
+      "business": ["finally", "lastly", "and importantly", "to conclude"],
+      "casual": ["finally", "and also", "one more thing", "lastly"]
+    },
+    "it is important to note": {
+      "formal": ["notably", "significantly", "it should be noted that", "importantly"],
+      "academic": ["notably", "it is noteworthy that", "significantly", "it bears mentioning"],
+      "business": ["importantly", "notably", "it's worth noting", "significantly"],
+      "casual": ["just so you know", "keep in mind", "heads up", "btw"]
+    }
+  },
+  "weakWords": ["very", "really", "just", "actually", "basically", "literally", "definitely", "certainly", "obviously", "clearly", "simply", "quite", "rather", "fairly", "pretty", "somewhat", "kind of", "sort of", "a lot", "thing", "stuff", "good", "bad", "nice", "interesting", "amazing", "great", "big", "small"]
+}
+
