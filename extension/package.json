@@ -1,0 +1,100 @@
+{
+  "name": "vocabulary-builder",
+  "displayName": "Vocabulary Builder",
+  "description": "Expand your vocabulary while coding - Word of the Day, synonym lookup, and quick quizzes",
+  "version": "1.0.0",
+  "publisher": "vocabulary-builder",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Education"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vocabularyBuilder.showWordOfTheDay",
+        "title": "Vocabulary: Show Word of the Day"
+      },
+      {
+        "command": "vocabularyBuilder.lookupSynonyms",
+        "title": "Vocabulary: Look Up Synonyms"
+      },
+      {
+        "command": "vocabularyBuilder.addToWordList",
+        "title": "Vocabulary: Add Word to Personal List"
+      },
+      {
+        "command": "vocabularyBuilder.showWordList",
+        "title": "Vocabulary: Show Personal Word List"
+      },
+      {
+        "command": "vocabularyBuilder.quickQuiz",
+        "title": "Vocabulary: Quick Quiz"
+      },
+      {
+        "command": "vocabularyBuilder.searchWord",
+        "title": "Vocabulary: Search Word"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vocabularyBuilder.lookupSynonyms",
+        "key": "cmd+shift+v",
+        "mac": "cmd+shift+v",
+        "win": "ctrl+shift+v",
+        "linux": "ctrl+shift+v",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "vocabularyBuilder.lookupSynonyms",
+          "when": "editorHasSelection",
+          "group": "vocabulary"
+        },
+        {
+          "command": "vocabularyBuilder.addToWordList",
+          "when": "editorHasSelection",
+          "group": "vocabulary"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Vocabulary Builder",
+      "properties": {
+        "vocabularyBuilder.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Word of the Day in status bar"
+        },
+        "vocabularyBuilder.enableHoverDefinitions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show definitions when hovering over vocabulary words"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.2"
+  }
+}
+
