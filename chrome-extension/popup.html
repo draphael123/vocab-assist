@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocab Assist</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 350px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #fafbff 0%, #f5f0ff 100%);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      padding: 20px;
+      color: white;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .logo-text {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .tagline {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    
+    .search-section {
+      padding: 16px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    
+    .search-input:focus {
+      border-color: #6366f1;
+    }
+    
+    .quick-words {
+      padding: 0 16px 16px;
+    }
+    
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    
+    .word-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .word-tag {
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #374151;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    
+    .word-tag:hover {
+      background: #6366f1;
+      color: white;
+      border-color: #6366f1;
+    }
+    
+    .results {
+      padding: 0 16px 16px;
+      display: none;
+    }
+    
+    .results.show {
+      display: block;
+    }
+    
+    .result-word {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    
+    .result-word strong {
+      color: #6366f1;
+    }
+    
+    .synonyms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .synonym {
+      padding: 8px 14px;
+      background: linear-gradient(135deg, #f0f0ff 0%, #fff5eb 100%);
+      border: 1px solid #e0e0ff;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-weight: 500;
+    }
+    
+    .synonym:hover {
+      background: linear-gradient(135deg, #6366f1 0%, #f59e0b 100%);
+      color: white;
+      border-color: transparent;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    
+    .shortcut {
+      padding: 16px;
+      background: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .shortcut-text {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+    }
+    
+    .shortcut-key {
+      display: inline-block;
+      padding: 2px 6px;
+      background: white;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      margin: 0 2px;
+    }
+    
+    .footer {
+      padding: 12px 16px;
+      text-align: center;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .footer a {
+      color: #6366f1;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .copied {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    .copied.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">✨</div>
+      <span class="logo-text">Vocab Assist</span>
+    </div>
+    <p class="tagline">Upgrade your vocabulary instantly</p>
+  </div>
+  
+  <div class="search-section">
+    <input type="text" class="search-input" id="search" placeholder="Type a word to upgrade..." autofocus>
+  </div>
+  
+  <div class="quick-words" id="quick-words">
+    <div class="section-title">Try these common words</div>
+    <div class="word-tags">
+      <span class="word-tag" data-word="good">good</span>
+      <span class="word-tag" data-word="bad">bad</span>
+      <span class="word-tag" data-word="important">important</span>
+      <span class="word-tag" data-word="help">help</span>
+      <span class="word-tag" data-word="use">use</span>
+      <span class="word-tag" data-word="make">make</span>
+      <span class="word-tag" data-word="show">show</span>
+      <span class="word-tag" data-word="think">think</span>
+    </div>
+  </div>
+  
+  <div class="results" id="results">
+    <div class="result-word">Upgrades for <strong id="result-word"></strong></div>
+    <div class="synonyms" id="synonyms"></div>
+    <div class="no-results" id="no-results" style="display: none;">
+      No upgrades found for this word
+    </div>
+  </div>
+  
+  <div class="shortcut">
+    <p class="shortcut-text">
+      Select any word and press <span class="shortcut-key">Ctrl</span>+<span class="shortcut-key">Shift</span>+<span class="shortcut-key">U</span> to upgrade
+    </p>
+  </div>
+  
+  <div class="footer">
+    <a href="https://website-ten-navy-tv0whkwmm8.vercel.app" target="_blank">Open full word library →</a>
+  </div>
+  
+  <div class="copied" id="copied">Copied to clipboard!</div>
+  
+  <script src="vocabulary.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
+

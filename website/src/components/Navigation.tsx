@@ -8,10 +8,8 @@ import { BookOpen, GraduationCap, Brain, Search, BarChart3, Sun, Moon, Menu, X }
 
 const navItems = [
   { href: '/', label: 'Home', icon: BookOpen },
-  { href: '/learn', label: 'Learn', icon: GraduationCap },
-  { href: '/quiz', label: 'Quiz', icon: Brain },
-  { href: '/browse', label: 'Browse', icon: Search },
-  { href: '/progress', label: 'Progress', icon: BarChart3 },
+  { href: '/upgrade', label: 'Upgrade Words', icon: GraduationCap },
+  { href: '/browse', label: 'Word Library', icon: Search },
 ]
 
 export default function Navigation() {

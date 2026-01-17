@@ -1,136 +1,85 @@
-# Lexicon - Vocabulary Builder
+# Vocab Assist - Word Upgrader
 
-A comprehensive vocabulary learning application with two parts:
-1. **Next.js Website** - Interactive flashcards, quizzes, and progress tracking
-2. **VS Code/Cursor Extension** - Learn vocabulary while coding
+A vocabulary upgrade tool that helps you write with more sophisticated words. Includes a web app and Chrome extension.
 
-![Vocabulary Builder](https://via.placeholder.com/800x400/6366f1/ffffff?text=Lexicon+Vocabulary+Builder)
+## 🌐 Live Website
+
+**[vocab-assist.vercel.app](https://website-ten-navy-tv0whkwmm8.vercel.app)**
 
 ## Features
 
-### Website Features
-- 📅 **Word of the Day** - Daily featured vocabulary word
-- 🎴 **Flashcards** - Interactive flip cards with confidence tracking
-- 🧠 **Quizzes** - Multiple choice questions with immediate feedback
-- 🔍 **Browse** - Search and filter 200+ words by level and category
-- 📊 **Progress Tracking** - Spaced repetition and learning statistics
-- 🌙 **Dark Mode** - Beautiful dark and light themes
+### Website
+- **Word Upgrader**: Paste text, select words, get sophisticated alternatives
+- **Quick Search**: Type any common word to find better alternatives
+- **Word Library**: Browse 200+ vocabulary words with definitions and examples
+- **Word of the Day**: Daily featured vocabulary word
 
-### Extension Features
-- 📖 **Status Bar Word** - Word of the Day always visible
-- 🔄 **Synonym Lookup** - Select text + Cmd+Shift+V to find synonyms and replace
-- 📝 **Personal Word List** - Save words for later review
-- ⚡ **Quick Quiz** - Take a 5-question quiz without leaving your editor
-- 💡 **Hover Definitions** - See definitions when hovering over vocabulary words
+### Chrome Extension
+- **Inline Suggestions**: Select any word while writing to see alternatives
+- **Keyboard Shortcut**: `Ctrl+Shift+U` (or `Cmd+Shift+U` on Mac)
+- **Right-Click Menu**: Upgrade Word option in context menu
+- **Popup Search**: Quick word lookup from toolbar
 
 ## Getting Started
 
 ### Website
 
 ```bash
-cd vocabulary-builder/website
+cd website
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
 
-### Extension
+### Chrome Extension
 
-1. Navigate to the extension directory:
-```bash
-cd vocabulary-builder/extension
-npm install
-npm run compile
-```
-
-2. Open the extension folder in VS Code/Cursor
-3. Press F5 to launch the Extension Development Host
-4. Use the commands from the Command Palette (Cmd+Shift+P):
-   - "Vocabulary: Show Word of the Day"
-   - "Vocabulary: Look Up Synonyms"
-   - "Vocabulary: Quick Quiz"
-   - And more...
+1. Open Chrome → `chrome://extensions/`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select the `chrome-extension` folder
+5. Done! Select any word and press `Ctrl+Shift+U`
 
 ## Project Structure
 
 ```
-vocabulary-builder/
+vocab-assist/
 ├── shared/
-│   └── vocabulary.json      # 200+ words shared between website and extension
-├── website/                 # Next.js 14 app
+│   └── vocabulary.json       # 200+ words database
+├── website/                  # Next.js app
 │   └── src/
-│       ├── app/             # App Router pages
+│       ├── app/             # Pages
 │       ├── components/      # React components
-│       └── lib/             # Utilities and helpers
-└── extension/               # VS Code extension
-    └── src/
-        ├── extension.ts     # Main extension entry
-        ├── vocabulary.ts    # Vocabulary data loader
-        └── wordListManager.ts # Personal word list storage
+│       └── lib/             # Utilities
+└── chrome-extension/        # Chrome extension
+    ├── manifest.json
+    ├── content.js           # Inline word upgrader
+    ├── popup.html           # Extension popup
+    └── vocabulary.js        # Synonym database
 ```
 
-## Vocabulary Data
+## Word Coverage
 
-The vocabulary includes 200+ carefully curated words across:
+The tool includes sophisticated alternatives for 50+ common words:
 
-**Levels:**
-- 🟢 Beginner (20%) - Common professional vocabulary
-- 🔵 Intermediate (35%) - Business and technical terms
-- 🟣 Advanced (35%) - Sophisticated vocabulary
-- 🔴 Expert (10%) - Specialized terminology
-
-**Categories:**
-- 📚 General (40%) - Everyday professional use
-- 💻 Technical (20%) - Software and technology
-- 💼 Business (20%) - Corporate and finance
-- 🎓 Academic (20%) - Research and writing
-
-## Spaced Repetition
-
-The app uses a spaced repetition algorithm based on confidence levels:
-
-| Confidence | Next Review |
-|------------|-------------|
-| 0-1        | 1 day       |
-| 2          | 2 days      |
-| 3          | 4 days      |
-| 4          | 7 days      |
-| 5          | 14 days     |
+| Basic Word | Better Alternatives |
+|------------|---------------------|
+| good | excellent, outstanding, exceptional, superior |
+| bad | poor, inadequate, substandard, inferior |
+| big | substantial, considerable, significant, extensive |
+| important | crucial, essential, vital, paramount |
+| difficult | challenging, demanding, arduous, formidable |
+| help | assist, facilitate, support, enable |
+| use | utilize, employ, leverage, harness |
+| show | demonstrate, illustrate, reveal, exhibit |
+| make | create, develop, establish, construct |
+| think | consider, contemplate, evaluate, assess |
 
 ## Tech Stack
 
-### Website
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Lucide Icons
-- localStorage for persistence
-
-### Extension
-- VS Code Extension API
-- TypeScript
-- Extension Storage API
-
-## Screenshots
-
-### Home Page
-Beautiful hero section with Word of the Day and quick stats.
-
-### Flashcards
-Click to flip between word and definition with confidence buttons.
-
-### Quiz
-Multiple choice questions with immediate feedback and final score.
-
-### Progress
-Track your learning with detailed statistics and spaced repetition schedule.
-
-## Contributing
-
-Contributions are welcome! Feel free to add more words to `shared/vocabulary.json` or improve the UI/UX.
+- **Website**: Next.js 14, TypeScript, Tailwind CSS
+- **Extension**: Chrome Extension Manifest V3
 
 ## License
 
 MIT
-

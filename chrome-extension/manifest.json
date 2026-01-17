@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Vocab Assist - Word Upgrader",
+  "version": "1.0.0",
+  "description": "Instantly upgrade your vocabulary while writing. Select any word to find sophisticated alternatives.",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "commands": {
+    "upgrade-word": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Upgrade selected word"
+    }
+  }
+}
+
