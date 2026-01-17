@@ -1,4 +1,4 @@
-import vocabularyData from '../../../shared/vocabulary.json';
+import vocabularyData from '@/data/vocabulary.json';
 import { Word, VocabularyData } from './types';
 
 const data = vocabularyData as VocabularyData;
