@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { 
   getAllSynonyms, 
   calculateWritingScore, 
@@ -473,13 +474,13 @@ export default function UpgradePage() {
         <p className="text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
           Upgrade your vocabulary directly while typing in Gmail, Google Docs, and more!
         </p>
-        <a
-          href="/#get-extension"
+        <Link
+          href="/extension"
           className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-600 transition-colors"
         >
           <Download className="w-5 h-5" />
-          Download Free
-        </a>
+          Install Extension
+        </Link>
       </div>
     </div>
   )

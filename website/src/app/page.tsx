@@ -423,11 +423,11 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Link
-              href="/upgrade"
+              href="/extension"
               className="group flex items-center gap-2 px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-white/90 transition-all"
             >
               <Download className="w-5 h-5" />
-              Download Extension
+              Get Extension
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>

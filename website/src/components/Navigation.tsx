@@ -4,12 +4,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useTheme } from './ThemeProvider'
-import { BookOpen, GraduationCap, Brain, Search, BarChart3, Sun, Moon, Menu, X } from 'lucide-react'
+import { BookOpen, GraduationCap, Brain, Search, BarChart3, Sun, Moon, Menu, X, Chrome } from 'lucide-react'
 
 const navItems = [
   { href: '/', label: 'Home', icon: BookOpen },
   { href: '/upgrade', label: 'Upgrade Words', icon: GraduationCap },
   { href: '/browse', label: 'Word Library', icon: Search },
+  { href: '/extension', label: 'Extension', icon: Chrome },
 ]
 
 export default function Navigation() {
